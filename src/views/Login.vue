@@ -34,7 +34,7 @@ data(){
   return{
     email:"",
     password:"",
-    imgSrc:require('D:\\vueProj\\votesystem\\src\\views\\img\\11.png')
+    imgSrc:require('./img/11.png')
   }
 },
   //methods handles login and register

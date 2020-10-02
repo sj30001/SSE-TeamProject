@@ -21,32 +21,58 @@
     <p>Have an account?
       <router-link to="/login">Login</router-link>
     </p>
+    <div>
+      {{ signUpData }}
+    </div>
+    <div>
+      {{ response }}
+    </div>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
+const axios = require('axios');
+let res = {response: null};
+let sud = {
+  name: "Foo Bar",
+  birthday: "1992-01-01",
+  passport: "eh003124",
+  driverLicense: 733542,
+  address: "22 Tecoma",
+  password: "abc123",
+  email: "121834@123.com",
+  phoneNumber: 432811111
+};
+axios.get('http://localhost:3000/csrf')
+    .then(function (resp) {
+      res.response = {csrfToken: resp.data.csrfToken};
+    })
+    .catch(function (error) {
+      alert(error);
+    });
+
 export default {
   name: "SignUp",
   data(){
     return{
       email:"",
       password:"",
-      imgSrc:require('D:\\vueProj\\votesystem\\src\\views\\img\\11.png')
+      response: res,
+      signUpData: sud,
+      imgSrc:require('./img/11.png')
     }
   },
   //methods handles login and register
   methods:{
     signUp: function(){
-      //log the user in
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-          user =>{
-            console.log(user.data)
-          },
-          err => {
-            alert(err);
-          }
-      )
+      axios.post('http://localhost:3000/users', sud)
+          .then(function (response) {
+            console.log(res);
+            res.response = response.data;
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
     }
 
   },
