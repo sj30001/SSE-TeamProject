@@ -3,6 +3,15 @@ import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
+import ForgetPassword from '../components/ForgetPassword.vue'
+import Vote from '../components/Vote.vue'
+import Result from '../components/Result.vue'
+import Console from '../components/console/Console.vue'
+import User from '../components/console/User.vue'
+import Candidates from '../components/console/Candidates.vue'
+import Party from '../components/console/Party.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -21,6 +30,41 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/forget_password',
+    name: 'Forget password',
+    component: ForgetPassword
+  },
+  {
+    path: '/vote',
+    name: 'Vote',
+    component: Vote
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: Result
+  },
+  {
+    path: '/console',
+    name: 'Console',
+    component: Console
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
+    path: '/candidates',
+    name: 'Candidates',
+    component: Candidates
+  },
+  {
+    path: '/party',
+    name: 'Party',
+    component: Party
   }
 ]
 
