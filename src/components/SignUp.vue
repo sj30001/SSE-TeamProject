@@ -59,7 +59,7 @@ export default {
       password:"",
       response: res,
       signUpData: sud,
-      imgSrc:require('./img/11.png')
+      imgSrc:require('../assets/img/11.png')
     }
   },
   //methods handles login and register

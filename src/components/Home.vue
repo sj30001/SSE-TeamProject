@@ -2,7 +2,7 @@
   <div class="home">
 
     <div class="logo">
-      <img src="./img/UA_LOGO.png" style="position: relative;top:-50px;left:30px;width:349px;height:111px; " alt="Adelaide">
+      <img src="../assets/img/UA_LOGO.png" style="position: relative;top:-50px;left:30px;width:349px;height:111px; " alt="Adelaide">
     </div>
     <div class="right_topBox">
       <ul>
@@ -28,7 +28,7 @@
         </ul>
       </div>
       <div class="image">
-        <img src="./img/voting.png" style="width:1000px;height:650px; " alt="voting">
+        <img src="../assets/img/voting.png" style="width:1000px;height:650px; " alt="voting">
       </div>
     </div>
     <input type="checkbox" id="check">
@@ -54,7 +54,7 @@
       <p style="padding-top:150px;padding-left:230px;">The 2020 TSRA election will be held on Saturday 28 November 2020.
         Information about the election – including postal vote applications, how to nominate, voting and COVID-19
         measures to protect the local community.</p>
-      <img src="./img/new1.png" style="width:1000px;height:350px;padding-left:240px;" alt="new1">
+      <img src="../assets/img/new1.png" style="width:1000px;height:350px;padding-left:240px;" alt="new1">
       <h3 class="new2">Access to AEC services during COVID-19</h3>
       <p style="padding-top:110px;padding-left:230px;">Most electoral business outside of an electoral event, including
         checking your enrolment and submitting an enrolment transaction, can be completed with us online, and AEC
@@ -74,7 +74,7 @@
       <p style="padding-top:70px;padding-left:1350px;">Redistribution processes in Victoria and Western Australia have
         now formally commenced. This follows the earlier determination of entitlement to House of Representatives seats
         for each state and territory.</p>
-      <img src="./img/new3.png" style="width:800px;height:550px;padding-left:1490px;" alt="new3">
+      <img src="../assets/img/new3.png" style="width:800px;height:550px;padding-left:1490px;" alt="new3">
       <h3 class="new4">Non-voter letters for Eden‑Monaro</h3>
       <p style="padding-top:110px;padding-left:1350px;">Following a federal by-election the AEC sends letters to people
         who appear to have failed to cast a vote. If you’ve received a letter, it outlines your option to either pay the
