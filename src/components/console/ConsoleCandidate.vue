@@ -44,7 +44,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="edit" v-model="dialogFormVisible">
+      <el-dialog title="edit" :visible.sync="dialogFormVisible">
         <el-form :model="form">
           <el-form-item label="State">
           <el-input v-model="editObj.state" auto-complete="off"></el-input>
@@ -71,6 +71,7 @@
 
           return {
             dialogFormVisible:false,
+            form: '',
             editObj: {
               state: '',
               name: '',
@@ -97,10 +98,10 @@
         },
         methods: {
           handleEdit(index, row) {
-            console.log(index, row);
            this.tableDataIndex=row;
             this.editObj=index;
             this.dialogFormVisible=true;
+            console.log(index, row);
 
           },
           editDo(){
