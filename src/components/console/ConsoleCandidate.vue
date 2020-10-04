@@ -2,6 +2,9 @@
   <div>
     <div style="background-color:#5B7B9E;padding:40px;margin-bottom:5px;"></div>
     <div>
+      <el-button
+          size="mini"
+          @click="handleAdd()">Add</el-button>
       <el-table
           :data="tableData" style="width: 60%">
         <el-table-column
@@ -44,7 +47,24 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="edit" :visible.sync="dialogFormVisible">
+      <el-dialog title="add" :visible.sync="addDialogFormVisible">
+        <el-form :model="form">
+          <el-form-item label="State">
+            <el-input v-model="AddObj.state" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="Name">
+            <el-input v-model="AddObj.name" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="Party">-->
+            <el-input v-model="AddObj.party" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div sloy="footer" class="dialog-footer">
+          <el-button @click="addDialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="editDo">Continue</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="edit" :visible.sync="editDialogFormVisible">
         <el-form :model="form">
           <el-form-item label="State">
           <el-input v-model="editObj.state" auto-complete="off"></el-input>
@@ -52,12 +72,12 @@
           <el-form-item label="Name">
            <el-input v-model="editObj.name" auto-complete="off"></el-input>
          </el-form-item>
-         <el-form-item label="Party">-->
+         <el-form-item label="Party">
             <el-input v-model="editObj.party" auto-complete="off"></el-input>
           </el-form-item>
         </el-form>
         <div sloy="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button @click="editDialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="editDo">Continue</el-button>
         </div>
       </el-dialog>
@@ -70,9 +90,14 @@
         data() {
 
           return {
-            dialogFormVisible:false,
+            addDialogFormVisible:false,
+            editDialogFormVisible:false,
             form: '',
             editObj: {
+              state: '',
+              name: '',
+              party: '',
+            },AddObj: {
               state: '',
               name: '',
               party: '',
@@ -99,15 +124,20 @@
         methods: {
           handleEdit(index, row) {
            this.tableDataIndex=row;
-            this.editObj=index;
-            this.dialogFormVisible=true;
+            //this.editObj=index;
+            this.editDialogFormVisible=true;
+
+          },
+          handleAdd() {
+            //this.editObj=index;
+            this.addDialogFormVisible=true;
 
           },
           editDo(){
             let index=this.tableDataIndex;
             //立即更改 若要交互 改成后台交互成功之后，再更新list
             this.tableData[index]=this.editObj;
-            this.dialogFormVisible=false;
+            this.editDialogFormVisible=false;
           },
           handleDelete(index, row){
             console.log(index, row);
