@@ -72,9 +72,12 @@
           <el-form-item label="Name">
            <el-input v-model="editObj.name" auto-complete="off"></el-input>
          </el-form-item>
-         <el-form-item label="Party">
-            <el-input v-model="editObj.party" auto-complete="off"></el-input>
-          </el-form-item>
+         <el-select v-model="partyList.partyName" placeholder="party">
+            <el-option v-for="item in partyList "
+                       :key="item.id"
+                       :label="item.partyName"
+                       :value="item.id"></el-option>
+          </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
           <el-button @click="editDialogFormVisible = false">Cancel</el-button>
@@ -86,9 +89,9 @@
       </template>
 
       <script>
+      const hc = require('@/utils/httpconnect')
       export default {
         data() {
-
           return {
             addDialogFormVisible:false,
             editDialogFormVisible:false,
@@ -118,13 +121,28 @@
               state: 'SA',
               name: 'R',
               party: 'asdf',
+            }],
+            partyList:[{
+              partyName:"",
+              id:""
             }]
           }
         },
+
         methods: {
-          handleEdit(index, row) {
+          async handleEdit(index, row) {
            this.tableDataIndex=row;
             //this.editObj=index;
+            let response = await hc.get('/api/party')
+            for (let item in response.data.party) {
+              let temp = {
+                id: item.id,
+                partyName: item.partName
+              }
+
+              this.partyList.push(temp)
+            }
+            console.log(response)
             this.editDialogFormVisible=true;
 
           },
