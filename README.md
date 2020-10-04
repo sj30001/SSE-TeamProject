@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # votesystem
 
 ## Project setup
@@ -27,3 +28,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# SSE-TeamProject
+>>>>>>> 42a00a12df3afa48704ad3fb887b66ecfb4a31e8

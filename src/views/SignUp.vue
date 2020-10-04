@@ -32,7 +32,7 @@ export default {
     return{
       email:"",
       password:"",
-      imgSrc:require('D:\\vueProj\\votesystem\\src\\views\\img\\11.png')
+      imgSrc:require('@/assets/img/logo.png')
     }
   },
   //methods handles login and register

@@ -3,6 +3,22 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
+// import ForgetPassword from '../components/ForgetPassword.vue'
+import ForgetPassword from '../views/SignUp.vue'
+// import Vote from '../components/Vote.vue'
+import Vote from '../views/SignUp.vue'
+// import Result from '../components/Result.vue'
+import Result from '../views/SignUp.vue'
+// import Console from '../components/console/Console.vue'
+import Console from '../components/console/ConsoleSidebar.vue'
+// import User from '../components/console/User.vue'
+import User from '../views/SignUp.vue'
+// import Candidates from '../components/console/Candidates.vue'
+import Candidates from '../components//console/ConsoleCandidate.vue'
+// import Party from '../components/console/Party.vue'
+import Party from '../views/SignUp.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -21,6 +37,41 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/forget_password',
+    name: 'Forget password',
+    component: ForgetPassword
+  },
+  {
+    path: '/vote',
+    name: 'Vote',
+    component: Vote
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: Result
+  },
+  {
+    path: '/console',
+    name: 'Console',
+    component: Console
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
+  },
+  {
+    path: '/candidates',
+    name: 'Candidates',
+    component: Candidates
+  },
+  {
+    path: '/party',
+    name: 'Party',
+    component: Party
   }
 ]
 
