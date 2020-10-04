@@ -57,7 +57,7 @@
           </el-form-item>
         </el-form>
         <div sloy="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisble = false">Cancel</el-button>
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="editDo">Continue</el-button>
         </div>
       </el-dialog>
@@ -101,7 +101,6 @@
            this.tableDataIndex=row;
             this.editObj=index;
             this.dialogFormVisible=true;
-            console.log(index, row);
 
           },
           editDo(){
