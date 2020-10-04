@@ -128,21 +128,20 @@
             }]
           }
         },
-
+        async mounted() {
+           let response = await hc.get('/api/party')
+           for (let i=0; i < response.data.party.length;i++) {
+             let temp = {
+               id: response.data.party[i].id,
+               partyName:response.data.party[i].partyName
+             }
+             this.partyList.push(temp)
+           }
+        },
         methods: {
-          async handleEdit(index, row) {
+          handleEdit(index, row) {
            this.tableDataIndex=row;
             //this.editObj=index;
-            let response = await hc.get('/api/party')
-            for (let item in response.data.party) {
-              let temp = {
-                id: item.id,
-                partyName: item.partName
-              }
-
-              this.partyList.push(temp)
-            }
-            console.log(response)
             this.editDialogFormVisible=true;
 
           },
