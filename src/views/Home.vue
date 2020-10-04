@@ -36,7 +36,8 @@ export default {
         "phoneNumber": 43281111
       }
       // let res = await hc.get('/api/users/21')
-      reqData._csrf = await hc.get('/api/csrf')
+      reqData._csrf= await hc.get('/api/party')
+      console.log(reqData._csrf)
       reqData._csrf = reqData._csrf.data.csrfToken
       try {
         let res = await hc.post('/api/users/', reqData)

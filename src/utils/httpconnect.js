@@ -7,17 +7,17 @@ const get = (param) =>{
 }
 
 //post create data
-const post = (data) =>{
-    return axios.post(URL,data)
+const post = (myUrl,data) =>{
+    return axios.post(URL+myUrl,data)
 }
 
 //put update data
-const put = (data) =>{
+const put = (myUrl,data) =>{
     return axios.put(URL,data)
 }
 
 //delete data
-const Delete = (data) =>{
+const Delete = (myUrl,data) =>{
     return axios.delete(URL,data)
 }
 export {get, post, put,Delete as delete}
