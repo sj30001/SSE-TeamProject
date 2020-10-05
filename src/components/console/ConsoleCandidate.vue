@@ -60,6 +60,8 @@
           </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
+          <br>
+          <br>
           <el-button @click="addDialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="addDO">Continue</el-button>
         </div>
@@ -79,7 +81,9 @@
                        :value="item.partyName"></el-option>
           </el-select>
         </el-form>
-        <div sloy="footer" class="dialog-footer">
+        <div sloy="footer" class="dialog-footer" >
+          <br>
+          <br>
           <el-button @click="editDialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="editDo">Continue</el-button>
         </div>
