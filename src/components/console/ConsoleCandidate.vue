@@ -69,14 +69,14 @@
       <el-dialog title="edit" :visible.sync="editDialogFormVisible">
         <el-form :model="editObj">
           <el-form-item label="Name">
-            <el-input v-model="editObj.candidateName" auto-complete="off" disabled="true"></el-input>
+            <el-input v-model="editObj.candidateName" auto-complete="off" :disabled=true></el-input>
           </el-form-item>
           <el-form-item label="State">
-          <el-input v-model="editObj.state" auto-complete="off" disabled="true"></el-input>
+          <el-input v-model="editObj.state" auto-complete="off" :disabled=true></el-input>
           </el-form-item>
 
           <el-form-item label="Current Party">
-            <el-select v-model="editObj.party" disabled="true" placeholder="party">
+            <el-select v-model="editObj.party" :disabled=true placeholder="party">
               <el-option v-for="item in partyList "
                          :key="item.party"
                          :label="item.party"
