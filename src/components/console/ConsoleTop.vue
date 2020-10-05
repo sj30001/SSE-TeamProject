@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="logo">
-    <img src="logo.jpg" alt="Adelaide logo">
+    <img src="@/assets/adelaide logo.png" alt="Adelaide logo">
   </div>
   <div class="line1" >
     <hr width=100% size=3 color=#5B7B9E style="filter:alpha(opacity=100,finishopacity=0,style=2)">
@@ -15,6 +15,6 @@ name: "ConsoleTop"
 }
 </script>
 
-<style src="../styles/ConsoleTop.css">
+<style src="@/styles/ConsoleTop.css">
 
 </style>

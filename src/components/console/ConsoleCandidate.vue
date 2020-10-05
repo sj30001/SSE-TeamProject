@@ -21,7 +21,7 @@
             width="180"
             prop="name">
           <template slot-scope="scope">
-            <span><a href="javascript:;"></a>{{ scope.row.name }}</span>
+            <span><a href="javascript:;"></a>{{ scope.row.candidateName }}</span>
           </template>
         </el-table-column><el-table-column
           label="States"
@@ -55,8 +55,8 @@
           <el-select v-model="AddObj.party" placeholder="party">
             <el-option v-for="item in partyList "
                        :key="item.id"
-                       :label="item.partyName"
-                       :value="item.partyName"></el-option>
+                       :label="item.party"
+                       :value="item.party"></el-option>
           </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
@@ -65,19 +65,30 @@
         </div>
       </el-dialog>
       <el-dialog title="edit" :visible.sync="editDialogFormVisible">
-        <el-form :model="form">
-          <el-form-item label="State">
-          <el-input v-model="editObj.state" auto-complete="off"></el-input>
-          </el-form-item>
+        <el-form :model="editObj">
           <el-form-item label="Name">
-           <el-input v-model="editObj.name" auto-complete="off"></el-input>
-         </el-form-item>
-         <el-select v-model="partyName" placeholder="party">
-            <el-option v-for="item in partyList "
-                       :key="item.partyName"
-                       :label="item.partyName"
-                       :value="item.partyName"></el-option>
-          </el-select>
+            <el-input v-model="editObj.candidateName" auto-complete="off" disabled="true"></el-input>
+          </el-form-item>
+          <el-form-item label="State">
+          <el-input v-model="editObj.state" auto-complete="off" disabled="true"></el-input>
+          </el-form-item>
+
+          <el-form-item label="Current Party">
+            <el-select v-model="editObj.party" disabled="true" placeholder="party">
+              <el-option v-for="item in partyList "
+                         :key="item.party"
+                         :label="item.party"
+                         :value="item.party"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="New Party">
+            <el-select v-model="editObj.newParty" placeholder="party">
+              <el-option v-for="item in partyList "
+                         :key="item.party"
+                         :label="item.party"
+                         :value="item.party"></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <div sloy="footer" class="dialog-footer">
           <el-button @click="editDialogFormVisible = false">Cancel</el-button>
@@ -91,19 +102,23 @@
       <script>
       const hc = require('@/utils/httpconnect')
       export default {
-
+        name: 'ConsoleCandidate',
         data() {
           return {
             addDialogFormVisible:false,
             editDialogFormVisible:false,
-            form: '',
-            editObj: {
-              state: '',
+            form: {
               name: '',
+              state: '',
+              party: '',
+            },
+            editObj: {
+              candidateName: '',
+              newParty: '',
               party: '',
             },AddObj: {
-              state: '',
               candidateName: '',
+              state: '',
               party: '',
               _csrf:""
             },
@@ -119,8 +134,8 @@
           for (let i=0; i < response_2.data.candidates.length;i++) {
             let temp = {
               party: response_2.data.candidates[i].party,
-              name:response_2.data.candidates[i].name,
-              states: response_2.data.candidates[i].states
+              candidateName:response_2.data.candidates[i].name,
+              state: response_2.data.candidates[i].state
             }
             this.tableData.push(temp)
           }
@@ -130,7 +145,7 @@
            for (let i=0; i < response.data.party.length;i++) {
              let temp = {
                id: response.data.party[i].id,
-               partyName:response.data.party[i].partyName
+               party:response.data.party[i].partyName
              }
              this.partyList.push(temp)
            }
@@ -138,10 +153,11 @@
 
         methods: {
           handleEdit(index, row) {
-           this.tableDataIndex=row;
-            //this.editObj=index;
             this.editDialogFormVisible=true;
+            this.editObj = row;
+            const oldParty = this.editObj.party;
 
+            this.editObj.party = oldParty;
           },
           handleAdd() {
             //this.editObj=index;
@@ -149,35 +165,71 @@
 
           },
           async addDO() {
-            let CsrfResponse = await hc.get("/api/csrf")
-            this.AddObj._csrf = CsrfResponse.data.csrfToken
-            console.log(this.AddObj)
-            try {
-              let res = await hc.post('/api/candidates', this.AddObj)
-              console.log(res)
-              this.msg = res
-            }catch(e){
-              this.msg = e
+            let CsrfResponse = await hc.get("/api/csrf");
+            this.AddObj._csrf = CsrfResponse.data.csrfToken;
+            let res = await hc.post('/api/candidates', this.AddObj);
+            if(res.data.status === 'success'){
+              // add success
+              this.$message({
+                type: 'success',
+                message: 'Successfully!'
+              });
+              this.addDialogFormVisible = false;
+              // refresh current page
+              location.reload();
+            }else {
+              // add failed
+              this.$message({
+                type: 'error',
+                message: res.data.msg
+              });
             }
+          },
+          async editDo(){
+            let CsrfResponse = await hc.get("/api/csrf");
+            this.editObj._csrf = CsrfResponse.data.csrfToken;
 
+            let res = await hc.put('/api/candidates', this.editObj);
+            if(res.data.status === 'success'){
+              // add success
+              this.$message({
+                type: 'success',
+                message: 'Successfully!'
+              });
+              this.editDialogFormVisible = false;
+              // refresh current page
+              location.reload();
+            }else {
+              // add failed
+              this.$message({
+                type: 'error',
+                message: res.data.msg
+              });
+            }
           },
-          editDo(){
-            let index=this.tableDataIndex;
-            //立即更改 若要交互 改成后台交互成功之后，再更新list
-            this.tableData[index]=this.editObj;
-            this.editDialogFormVisible=false;
-          },
-          handleDelete(index, row){
-            console.log(index, row);
+          async handleDelete(index, row){
+            let CsrfResponse = await hc.get("/api/csrf")
+            let _csrf = CsrfResponse.data.csrfToken;
+            let reqData = {
+              candidateName: row.candidateName,
+              party: row.party,
+                _csrf: _csrf
+            };
+
             this.$confirm('Are you sure to delete this item?', 'Notice', {
               confirmButtonText: 'Continue',
               cancelButtonText: 'Cancel',
               type: 'warning'
             }).then(() => {
-              this.$message({
-                type: 'success',
-                message: 'Successfully!'
-              });
+              // send delete request
+              hc.delete('/api/candidates/',reqData).then(() => {
+                this.$message({
+                  type: 'success',
+                  message: 'Success!'
+                });
+                // reload page
+                location.reload();
+              })
             }).catch(() => {
               this.$message({
                 type: 'info',

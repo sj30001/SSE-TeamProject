@@ -39,6 +39,7 @@
 <script>
 
 export default {
+  name: "ConsoleSidebar",
   data() {
     return {
       isCollapse: true
