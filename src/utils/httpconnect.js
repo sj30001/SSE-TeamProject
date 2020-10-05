@@ -1,6 +1,6 @@
 const axios = require('axios');
 let config = {
-    baseURL: 'http://104.199.137.67:3000',
+    baseURL: '',
     withCredentials: true
 }
 const axiosInstance = axios.create(config);
