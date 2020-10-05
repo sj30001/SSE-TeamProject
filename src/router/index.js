@@ -16,7 +16,7 @@ import User from '../views/SignUp.vue'
 // import Candidates from '../components/console/Candidates.vue'
 import Candidates from '../components//console/ConsoleCandidate.vue'
 // import Party from '../components/console/Party.vue'
-import Party from '../views/SignUp.vue'
+import Party from '../components/console/ConsoleParty.vue'
 
 
 
