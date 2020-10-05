@@ -12,8 +12,7 @@
             width="180"
             prop="party">
           <template slot-scope="scope">
-
-            <span style="margin-left: 10px"><a href="javascript:;"></a>{{ scope.row.party }}</span>
+            <span><a href="javascript:;"></a>{{ scope.row.party }}</span>
           </template>
         </el-table-column>
 
@@ -22,13 +21,7 @@
             width="180"
             prop="name">
           <template slot-scope="scope">
-            <el-popover trigger="hover" placement="top">
-              <p>name: {{ scope.row.name }}</p>
-
-              <div slot="reference" class="name-wrapper">
-                <el-tag size="medium">{{ scope.row.name }}</el-tag>
-              </div>
-            </el-popover>
+            <span><a href="javascript:;"></a>{{ scope.row.name }}</span>
           </template>
         </el-table-column><el-table-column
           label="States"
@@ -36,7 +29,7 @@
           prop="States">
         <template slot-scope="scope">
 
-          <span style="margin-left: 10px">{{ scope.row.state }}</span>
+          <span>{{ scope.row.state }}</span>
         </template>
       </el-table-column>
         <el-table-column label="Operation">
@@ -59,9 +52,12 @@
           <el-form-item label="Name">
             <el-input v-model="AddObj.name" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="Party">-->
-            <el-input v-model="AddObj.party" auto-complete="off"></el-input>
-          </el-form-item>
+          <el-select v-model="partyList.partyName" placeholder="party">
+            <el-option v-for="item in partyList "
+                       :key="item.id"
+                       :label="item.partyName"
+                       :value="item.id"></el-option>
+          </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
           <el-button @click="addDialogFormVisible = false">Cancel</el-button>
@@ -109,6 +105,7 @@
               state: '',
               name: '',
               party: '',
+              _csrf:""
             },
             tableData: [],
             partyList:[]
