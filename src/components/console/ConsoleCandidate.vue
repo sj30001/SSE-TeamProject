@@ -9,7 +9,8 @@
           :data="tableData" style="width: 60%">
         <el-table-column
             label="Candidates party"
-            width="180">
+            width="180"
+            prop="party">
           <template slot-scope="scope">
 
             <span style="margin-left: 10px"><a href="javascript:;"></a>{{ scope.row.party }}</span>
@@ -17,7 +18,9 @@
         </el-table-column>
 
         <el-table-column
-            label="Candidates Name" width="180">
+            label="Candidates Name"
+            width="180"
+            prop="name">
           <template slot-scope="scope">
             <el-popover trigger="hover" placement="top">
               <p>name: {{ scope.row.name }}</p>
@@ -28,8 +31,9 @@
             </el-popover>
           </template>
         </el-table-column><el-table-column
-          label="State"
-          width="180">
+          label="States"
+          width="180"
+          prop="States">
         <template slot-scope="scope">
 
           <span style="margin-left: 10px">{{ scope.row.state }}</span>
@@ -91,6 +95,7 @@
       <script>
       const hc = require('@/utils/httpconnect')
       export default {
+
         data() {
           return {
             addDialogFormVisible:false,
@@ -105,30 +110,25 @@
               name: '',
               party: '',
             },
-            tableData: [{
-              state: 'SA',
-              name: 'Q',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'W',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'E',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'R',
-              party: 'asdf',
-            }],
-            partyList:[{
-              partyName:"",
-              id:""
-            }]
+            tableData: [],
+            partyList:[]
           }
         },
+
         async mounted() {
+
+          //get candidates
+          let response_2 = await hc.get("/api/candidates")
+          for (let i=0; i < response_2.data.candidates.length;i++) {
+            let temp = {
+              party: response_2.data.candidates[i].party,
+              name:response_2.data.candidates[i].name,
+              states: response_2.data.candidates[i].states
+            }
+            this.tableData.push(temp)
+          }
+
+          //get partyList
            let response = await hc.get('/api/party')
            for (let i=0; i < response.data.party.length;i++) {
              let temp = {
@@ -138,6 +138,7 @@
              this.partyList.push(temp)
            }
         },
+
         methods: {
           handleEdit(index, row) {
            this.tableDataIndex=row;
