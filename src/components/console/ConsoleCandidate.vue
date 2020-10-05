@@ -50,18 +50,18 @@
             <el-input v-model="AddObj.state" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="Name">
-            <el-input v-model="AddObj.name" auto-complete="off"></el-input>
+            <el-input v-model="AddObj.candidateName" auto-complete="off"></el-input>
           </el-form-item>
-          <el-select v-model="partyList.partyName" placeholder="party">
+          <el-select v-model="AddObj.party" placeholder="party">
             <el-option v-for="item in partyList "
                        :key="item.id"
                        :label="item.partyName"
-                       :value="item.id"></el-option>
+                       :value="item.partyName"></el-option>
           </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
           <el-button @click="addDialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="editDo">Continue</el-button>
+          <el-button type="primary" @click="addDO">Continue</el-button>
         </div>
       </el-dialog>
       <el-dialog title="edit" :visible.sync="editDialogFormVisible">
@@ -72,11 +72,11 @@
           <el-form-item label="Name">
            <el-input v-model="editObj.name" auto-complete="off"></el-input>
          </el-form-item>
-         <el-select v-model="partyList.partyName" placeholder="party">
+         <el-select v-model="partyName" placeholder="party">
             <el-option v-for="item in partyList "
-                       :key="item.id"
+                       :key="item.partyName"
                        :label="item.partyName"
-                       :value="item.id"></el-option>
+                       :value="item.partyName"></el-option>
           </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
@@ -103,7 +103,7 @@
               party: '',
             },AddObj: {
               state: '',
-              name: '',
+              candidateName: '',
               party: '',
               _csrf:""
             },
@@ -146,6 +146,19 @@
           handleAdd() {
             //this.editObj=index;
             this.addDialogFormVisible=true;
+
+          },
+          async addDO() {
+            let CsrfResponse = await hc.get("/api/csrf")
+            this.AddObj._csrf = CsrfResponse.data.csrfToken
+            console.log(this.AddObj)
+            try {
+              let res = await hc.post('/api/candidates', this.AddObj)
+              console.log(res)
+              this.msg = res
+            }catch(e){
+              this.msg = e
+            }
 
           },
           editDo(){
