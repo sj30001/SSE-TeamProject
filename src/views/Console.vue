@@ -1,9 +1,22 @@
 <template>
-  <div class="console" id="console">
-    <ConsoleTop/>
-    <ConsoleSidebar/>
-    <ConsoleCandidate />
-  </div>
+  <el-container>
+<!--    top-->
+    <el-header>
+      <ConsoleTop/>
+    </el-header>
+
+    <el-container>
+<!--      sidebar-->
+      <el-aside width="200px">
+        <ConsoleSidebar/>
+      </el-aside>
+
+<!--      main-->
+      <el-main>
+        <ConsoleCandidate/>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
@@ -15,12 +28,13 @@ export default {
   name: 'Console',
   components: {ConsoleCandidate, ConsoleSidebar, ConsoleTop},
   data() {
-    return {
-    }
+    return {}
   },
-  methods: {
-  }
+  methods: {}
 
 }
 
 </script>
+
+<style>
+</style>
