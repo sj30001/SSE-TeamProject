@@ -114,4 +114,8 @@ export default {
 .a{
   text-decoration: none;
 }
+*{
+  font-family:"Arial";
+
+}
 </style>

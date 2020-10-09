@@ -73,6 +73,9 @@ width:20%;
 /*  left:25%;*/
 /*  z-index:10;*/
 /*}*/
+*{
+  font-family:"Arial";
 
+}
 
 </style>

@@ -257,4 +257,8 @@
   width:60%;
 
 }
+*{
+  font-family:"Arial";
+
+}
       </style>

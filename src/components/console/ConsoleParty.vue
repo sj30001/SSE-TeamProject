@@ -161,5 +161,8 @@ export default {
 </script>
 
 <style src="@/styles/ConsoleSidebar.css">
+*{
+  font-family:"Arial";
 
+}
 </style>

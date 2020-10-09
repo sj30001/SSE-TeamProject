@@ -21,8 +21,11 @@
       <el-menu-item style="text-align:center;font-size:30px;width:18%" index="5">Result page</el-menu-item>
 
     </el-menu>
-    <el-button class="Signin" type="text">Sign in</el-button>
-    <el-button class="Signup" type="text">Sign up</el-button>
+    <div>
+      <router-link to="/login"><el-button class="Signin" type="text">Sign in</el-button></router-link>
+      <router-link to="/signup"><el-button class="Signup" type="text">Sign up</el-button></router-link>
+    </div>
+
   </div>
 </template>
 
@@ -65,5 +68,9 @@ name: "HomeTop"
   position:absolute;
   top:8%;
   right:4%;
+}
+*{
+  font-family:"Arial";
+
 }
 </style>

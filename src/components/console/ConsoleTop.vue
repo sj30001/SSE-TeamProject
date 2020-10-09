@@ -35,4 +35,8 @@ name: "ConsoleTop"
   top:170px;
   width:100%
 }
+*{
+  font-family:"Arial";
+
+}
 </style>
