@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:5px;"></div>
+<!--    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:0px;width:90%"></div>-->
     <div>
       <el-button
           size="mini"
+
+
           @click="handleAdd()">Add</el-button>
       <el-table
-          :data="tableData" style="width: 60%">
+          :data="tableData" style="width:70%;float:left">
         <el-table-column
             label="Candidates party"
             width="180"
@@ -32,7 +34,7 @@
           <span>{{ scope.row.state }}</span>
         </template>
       </el-table-column>
-        <el-table-column label="Operation">
+        <el-table-column label="Operation" width="180">
           <template slot-scope="scope">
             <el-button
                 size="mini"
@@ -247,6 +249,12 @@
       }
       </script>
 
-      <style src="@/styles/ConsoleSidebar.css">
+      <style >
+.el-table{
 
+}
+.el-dialog{
+  width:60%;
+
+}
       </style>

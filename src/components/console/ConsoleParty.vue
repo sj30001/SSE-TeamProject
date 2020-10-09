@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:5px;"></div>
+
     <div>
       <el-button
           size="mini"

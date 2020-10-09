@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/HomePage.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 // import ForgetPassword from '../components/ForgetPassword.vue'
@@ -12,11 +12,11 @@ import Result from '../views/SignUp.vue'
 // import Console from '../components/console/Console.vue'
 import Console from '@/views/Console'
 // import User from '../components/console/User.vue'
-import User from '../views/SignUp.vue'
+import User from '../views/HomePage.vue'
 // import Candidates from '../components/console/Candidates.vue'
-import Candidates from '../components//console/ConsoleCandidate.vue'
+import Candidates from '../views/Candidate.vue'
 // import Party from '../components/console/Party.vue'
-import Party from '../components/console/ConsoleParty.vue'
+import Party from '../views/Party.vue'
 
 
 
