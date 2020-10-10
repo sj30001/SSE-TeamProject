@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="logo">
-      <img src="@/assets/adelaide logo.png" alt="Adelaide logo">
+    <div class="logo" >
+      <img src="@/assets/adelaide logo.png" alt="Adelaide logo" style="width:110px;height:auto;position:absolute;top:2%;left:2%">
     </div>
     <div class="line1" >
       <hr width=100% size=3 color=#5B7B9E style="filter:alpha(opacity=100,finishopacity=0,style=2)">
@@ -13,12 +13,12 @@
     font-size="30px"
     text-color="white"
             >
-      <el-menu-item style="text-align:center;width:16%;font-size:30px; " index="0">Home</el-menu-item>
-      <el-menu-item style="text-align:center;width:17%;font-size:30px" index="1">User </el-menu-item>
-      <el-menu-item style="text-align:center;width:16%;font-size:30px" index="2">Voting page</el-menu-item>
-      <el-menu-item style="text-align:center;width:17%;font-size:30px" index="3">Candidate information</el-menu-item>
-      <el-menu-item style="text-align:center;width:16%;font-size:30px" index="4">Voting rule</el-menu-item>
-      <el-menu-item style="text-align:center;font-size:30px;width:18%" index="5">Result page</el-menu-item>
+      <el-menu-item style="text-align:center;width:16%;font-size:24px; " index="0">Home</el-menu-item>
+      <el-menu-item style="text-align:center;width:17%;font-size:24px" index="1">User </el-menu-item>
+      <el-menu-item style="text-align:center;width:16%;font-size:24px" index="2">Voting page</el-menu-item>
+      <el-menu-item style="text-align:center;width:17%;font-size:24px" index="3">Candidate information</el-menu-item>
+      <el-menu-item style="text-align:center;width:16%;font-size:24px" index="4">Voting rule</el-menu-item>
+      <el-menu-item style="text-align:center;font-size:24px;width:18%" index="5">Result page</el-menu-item>
 
     </el-menu>
     <div>
@@ -45,10 +45,14 @@ name: "HomeTop"
 
 
 }
-.voting{
-  font-size:30px;
-  text-align:center
+.logo{
+  width:10px;
+  height:auto;
 }
+/*.voting{*/
+/*  font-size:24px;*/
+/*  text-align:center*/
+/*}*/
 .el-menu{
   position:absolute;
   top:13%;
@@ -57,16 +61,16 @@ name: "HomeTop"
 }
 .Signin{
   color:#5B7B9E;
-  font-size:30px;
+  font-size:24px;
   position:absolute;
-  top:8%;
+  top:7%;
   right:10%;
 }
 .Signup{
   color:#5B7B9E;
-  font-size:30px;
+  font-size:24px;
   position:absolute;
-  top:8%;
+  top:7%;
   right:4%;
 }
 *{

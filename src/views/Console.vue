@@ -3,12 +3,12 @@
 <!--    top-->
     <el-header>
       <ConsoleTop/>
-      <h2 style="position:absolute;right:15%;top:7%;font-size:30px;color:#eae7e7;">Home</h2>
+      <h2 style="position:absolute;right:15%;top:4%;font-size:30px;color:#eae7e7;">Home</h2>
     </el-header>
 
     <el-container>
 <!--      sidebar-->
-      <el-aside width="200px">
+      <el-aside width="250px">
         <ConsoleSidebar/>
       </el-aside>
 
@@ -19,7 +19,7 @@
           <button style="background-color:#FB4E46;color:white;width:15%;height:10%;position:absolute;top:40%;left:25%;font-size:50px;border:none;border-radius: 10px; ">Start</button>
         </div>
         <div>
-          <img src="@/assets/voting.png" alt="voting image" style="position:absolute;top:30%;right:12%">
+          <img src="@/assets/voting.png" alt="voting image" style="position:absolute;top:30%;right:12%;width:36.6%;height:auto">
         </div>
       </el-main>
     </el-container>
@@ -52,7 +52,7 @@ export default {
   z-index:1;
   position:absolute;
   left:10%;
-  top:19.7%;
+  top:22%;
 width:20%;
   height:100%;
 

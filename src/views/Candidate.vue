@@ -4,7 +4,7 @@
     <el-header>
       <ConsoleTop/>
     </el-header>
-    <h2 style="position:absolute;right:15%;top:14%;font-size:30px;color:#eae7e7;">Candidate update</h2>
+    <h2 style="position:absolute;right:15%;top:12%;font-size:30px;color:#eae7e7;">Candidate update</h2>
 
     <el-container>
       <!--      sidebar-->
@@ -50,7 +50,7 @@ name: "Candidate",
   line-height: 200px;
   position:absolute;
 
-  top:20%;
+  top:25%;
   width:60%;
   z-index:2;
 left:40%
@@ -64,7 +64,7 @@ left:40%
   z-index:1;
 position:absolute;
   left:10%;
-  top:19.7%;
+  top:22%;
 width:200px;
   height:100%;
 

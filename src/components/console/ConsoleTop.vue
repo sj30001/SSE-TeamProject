@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div class="logo">
-    <img src="@/assets/adelaide logo.png" alt="Adelaide logo">
+  <div >
+    <img src="@/assets/adelaide logo.png" alt="Adelaide logo" class="logo">
   </div>
   <div class="line1" >
     <hr width=100% size=3 color=#5B7B9E style="filter:alpha(opacity=100,finishopacity=0,style=2)">
@@ -18,7 +18,7 @@ name: "ConsoleTop"
 
 <style >
 .logo{
-  width:5%;
+  width:6%;
   height:auto;
   position:absolute;
   top:1%;

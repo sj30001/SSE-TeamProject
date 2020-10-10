@@ -12,8 +12,8 @@
 
       <!--      main-->
       <el-main>
-        <div style="background-color:#C0CDDA;position:absolute;top:19%;left:3%;width:95%;height:43.5%">
-          <h2 class="text_intro" style="color:#45688E;font-size:50px;position:absolute;left:15%;top:10%">
+        <div style="background-color:#C0CDDA;position:absolute;top:20%;left:2%;width:100%;height:43.5%">
+          <h2 class="text_intro" style="color:#45688E;font-size:42px;position:absolute;left:15%;top:9%">
             What do you<br><br>
             need to do today?
           </h2>
@@ -22,15 +22,15 @@
             <el-button class="voting" type="text">Voting ></el-button>
             <el-button class="result" type="text">Result ></el-button>
           </div>
-          <div class="image">
-            <img src="@/assets/voting.png"  alt="voting" >
+          <div >
+            <img src="@/assets/voting.png"  alt="voting" class="image">
           </div>
         </div>
 <!--        news-->
         <div class="newsLeft">
           <h2 class="newsTitle">What's happening</h2>
           <h3 class="new1">2020 Torres Strait Regional Authority (TSRA) election</h3>
-          <p style="padding-top:12%;padding-left:17%;">The 2020 TSRA election will be held on Saturday 28 November 2020. Information about the election – including postal vote applications, how to nominate, voting and COVID-19 measures to protect the local community.</p>
+          <p style="padding-top:18%;padding-left:17%;">The 2020 TSRA election will be held on Saturday 28 November 2020. Information about the election – including postal vote applications, how to nominate, voting and COVID-19 measures to protect the local community.</p>
           <img src="@/assets/new1.png" style="width:70%;height:auto;padding-left:20%;" alt="new1">
 
           <h3 class="new2">Access to AEC services during COVID-19</h3>
@@ -43,7 +43,7 @@
         <div class="newsRight">
 
           <h3 class="new3">Redistribution processes underway</h3>
-          <p style="padding-top:6%;padding-left:55%;">Redistribution processes in Victoria and Western Australia have now formally commenced. This follows the earlier determination of entitlement to House of Representatives seats for each state and territory.</p>
+          <p style="padding-top:9%;padding-left:55%;">Redistribution processes in Victoria and Western Australia have now formally commenced. This follows the earlier determination of entitlement to House of Representatives seats for each state and territory.</p>
           <img src="@/assets/new3.png" style="width:30%;height:auto;padding-left:60%;" alt="new3">
           <h3 class="new4">Non-voter letters for Eden‑Monaro</h3>
           <p style="padding-top:5%;padding-left:55%;">Following a federal by-election the AEC sends letters to people who appear to have failed to cast a vote. If you’ve received a letter, it outlines your option to either pay the $20 penalty or provide a valid reason.</p>
@@ -84,29 +84,29 @@ export default {
   background-color: white;
   color: #333;
   /*text-align: center;*/
-  width:95%;
+  width:100%;
   line-height: 20%;
   border:none;
 }
 .signin{
   color:#5B7B9E;
-  font-size:30px;
+  font-size:24px;
   position:absolute;
-top:52%;
+top:54%;
   left:20%;
 }
 .voting{
   color:#5B7B9E;
-  font-size:30px;
+  font-size:24px;
   position:absolute;
-  top:62%;
+  top:64%;
   left:20%;
 }
 .result{
   color:#5B7B9E;
-  font-size:30px;
+  font-size:24px;
   position:absolute;
-  top:72%;
+  top:74%;
   left:19.7%;
 }
 *{
@@ -116,9 +116,9 @@ top:52%;
 .image{
   position:absolute;
   top:0%;
-  width:30%;
+  width:36.6%;
   height:auto;
-  right:15%
+  right:8%
 
 }
 .newsLeft{
@@ -144,7 +144,7 @@ top:52%;
 .new2{
   font-size:24px;
   position:absolute;
-  top:77%;
+  top:70%;
   left:17%
 }
 .el-divider{
@@ -164,7 +164,7 @@ top:52%;
 .new3{
   font-size:24px;
   position:absolute;
-  top:12%;
+  top:14%;
   left:55%
 }
 .new4{
@@ -181,7 +181,7 @@ top:52%;
 }
 .notice{
 position: absolute;
-  top:1700px;
+  top:1300px;
   left:40%;
 
 }
