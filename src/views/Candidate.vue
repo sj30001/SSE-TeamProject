@@ -8,7 +8,7 @@
 
     <el-container>
       <!--      sidebar-->
-      <el-aside width="300px">
+      <el-aside width="400px">
         <ConsoleSidebar/>
       </el-aside>
 

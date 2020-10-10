@@ -64,7 +64,7 @@ name: "Party",
   z-index:1;
   position:absolute;
   left:10%;
-  top:19%;
+  top:19.7%;
 
   height:100%;
 

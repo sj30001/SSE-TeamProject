@@ -18,21 +18,21 @@ name: "ConsoleTop"
 
 <style >
 .logo{
-  width:100px;
-  height:40px;
+  width:5%;
+  height:auto;
   position:absolute;
-  top:10px;
+  top:1%;
   left:3%;
   float:left;
 }
 .line1{
   position:absolute;
-  top:150px;
+  top:11%;
   width:100%
 }
 .line2{
   position:absolute;
-  top:170px;
+  top:13%;
   width:100%
 }
 *{

@@ -49,7 +49,7 @@
           <p style="padding-top:5%;padding-left:55%;">Following a federal by-election the AEC sends letters to people who appear to have failed to cast a vote. If you’ve received a letter, it outlines your option to either pay the $20 penalty or provide a valid reason.</p>
 
         </div>
-        <el-row :gutter="12">
+        <el-row :gutter="12" class="notice">
           <el-col :span="8">
             <el-card shadow="always" width="100%" >
               Notice: The AEC's Online Enrolment System will be unavailable Thursday 1 October 2020 between 6pm and 10pm AEST due to an upgrade.
@@ -85,7 +85,7 @@ export default {
   color: #333;
   /*text-align: center;*/
   width:95%;
-  line-height: 200px;
+  line-height: 20%;
   border:none;
 }
 .signin{
@@ -179,7 +179,7 @@ top:52%;
   font-size:24px;
   width:100% !important;
 }
-.el-row{
+.notice{
 position: absolute;
   top:1700px;
   left:40%;
