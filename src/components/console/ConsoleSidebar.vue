@@ -63,10 +63,10 @@ background-color="#5B7B9E"
           </el-menu-item-group>
 
         </el-submenu>
-        <el-menu-item index="3">
+        <router-link to="/user" class="a"><el-menu-item index="3">
           <i class="el-icon-document"></i>
-          <span slot="title">Personal information</span>
-        </el-menu-item>
+         <span slot="title">User Update</span>
+        </el-menu-item></router-link>
 
         <el-menu-item index="4">
           <i class="el-icon-setting"></i>
