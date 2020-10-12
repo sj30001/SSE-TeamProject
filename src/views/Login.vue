@@ -41,6 +41,7 @@
 
 <script>
 import SIdentify from '@/components/identify.vue'
+import axios from '@/api/http'
 export default {
   name: 'login',
   data() {
@@ -66,7 +67,7 @@ export default {
       fontstyle: {
       },
       loginForm: {
-        username: 'bob@outlook.com',
+        email: 'bob@outlook.com',
         password: 'bob321123',
         verifycode: ''
       },
@@ -74,7 +75,7 @@ export default {
       identifyCodes: '1234567890',
       identifyCode: '',
       loginRules: {
-        username: [
+        email: [
           { required: true, trigger: 'blur', validator: validateUsername }
         ],
         password: [
@@ -114,10 +115,27 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          // eslint-disable-next-line no-unused-vars
-          this.$store.dispatch('Login', this.loginForm).then(res => {
-            this.$router.push({ path: '/dashboard/dashboard' })
+          axios.post('/login',{
+            user: this.loginForm.user,
+            pass: this.loginForm.pass
           })
+          .then((response) => {
+            if(response.status === 200) {
+              this.$store.commit('SET_TOKEN',response.data.token)
+              this.$store.commit('GET_USER',response.data.user)
+              this.$message({
+                message:"Successfully Login",
+                type:"Success"
+              })
+              this.$router.push({name: 'Home'})
+            }
+          })
+          .catch(function(error){
+            console.log(error)
+          })
+        }else{
+          console.log('error submit')
+          return false
         }
       })
     },
