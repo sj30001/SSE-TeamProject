@@ -1,38 +1,40 @@
 <template>
   <div>
-    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:5px;"></div>
+<!--    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:0px;width:90%"></div>-->
     <div>
+      <el-button
+          size="mini"
+
+
+          @click="handleAdd()">Add</el-button>
       <el-table
-          :data="tableData" style="width: 60%">
+          :data="tableData" style="width:70%;float:left">
         <el-table-column
             label="Candidates party"
-            width="180">
+            width="180"
+            prop="party">
           <template slot-scope="scope">
-
-            <span style="margin-left: 10px"><a href="javascript:;"></a>{{ scope.row.party }}</span>
+            <span><a href="javascript:;"></a>{{ scope.row.party }}</span>
           </template>
         </el-table-column>
 
         <el-table-column
-            label="Candidates Name" width="180">
+            label="Candidates Name"
+            width="180"
+            prop="name">
           <template slot-scope="scope">
-            <el-popover trigger="hover" placement="top">
-              <p>name: {{ scope.row.name }}</p>
-
-              <div slot="reference" class="name-wrapper">
-                <el-tag size="medium">{{ scope.row.name }}</el-tag>
-              </div>
-            </el-popover>
+            <span><a href="javascript:;"></a>{{ scope.row.candidateName }}</span>
           </template>
         </el-table-column><el-table-column
-          label="State"
-          width="180">
+          label="States"
+          width="180"
+          prop="States">
         <template slot-scope="scope">
 
-          <span style="margin-left: 10px">{{ scope.row.state }}</span>
+          <span>{{ scope.row.state }}</span>
         </template>
       </el-table-column>
-        <el-table-column label="Operation">
+        <el-table-column label="Operation" width="180">
           <template slot-scope="scope">
             <el-button
                 size="mini"
@@ -44,20 +46,58 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="edit" :visible.sync="dialogFormVisible">
+      <el-dialog title="add" :visible.sync="addDialogFormVisible">
         <el-form :model="form">
           <el-form-item label="State">
-          <el-input v-model="editObj.state" auto-complete="off"></el-input>
+            <el-input v-model="AddObj.state" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="Name">
-           <el-input v-model="editObj.name" auto-complete="off"></el-input>
-         </el-form-item>
-         <el-form-item label="Party">-->
-            <el-input v-model="editObj.party" auto-complete="off"></el-input>
+            <el-input v-model="AddObj.candidateName" auto-complete="off"></el-input>
           </el-form-item>
+          <el-select v-model="AddObj.party" placeholder="party">
+            <el-option v-for="item in partyList "
+                       :key="item.id"
+                       :label="item.party"
+                       :value="item.party"></el-option>
+          </el-select>
         </el-form>
         <div sloy="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <br>
+          <br>
+          <el-button @click="addDialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="addDO">Continue</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="edit" :visible.sync="editDialogFormVisible">
+        <el-form :model="editObj">
+          <el-form-item label="Name">
+            <el-input v-model="editObj.candidateName" auto-complete="off" :disabled=true></el-input>
+          </el-form-item>
+          <el-form-item label="State">
+          <el-input v-model="editObj.state" auto-complete="off" :disabled=true></el-input>
+          </el-form-item>
+
+          <el-form-item label="Current Party">
+            <el-select v-model="editObj.party" :disabled=true placeholder="party">
+              <el-option v-for="item in partyList "
+                         :key="item.party"
+                         :label="item.party"
+                         :value="item.party"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="New Party">
+            <el-select v-model="editObj.newParty" placeholder="party">
+              <el-option v-for="item in partyList "
+                         :key="item.party"
+                         :label="item.party"
+                         :value="item.party"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div sloy="footer" class="dialog-footer" >
+          <br>
+          <br>
+          <el-button @click="editDialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="editDo">Continue</el-button>
         </div>
       </el-dialog>
@@ -66,60 +106,136 @@
       </template>
 
       <script>
+      const hc = require('@/utils/httpconnect')
       export default {
+        name: 'ConsoleCandidate',
         data() {
-
           return {
-            dialogFormVisible:false,
-            form: '',
-            editObj: {
-              state: '',
+            addDialogFormVisible:false,
+            editDialogFormVisible:false,
+            form: {
               name: '',
+              state: '',
               party: '',
             },
-            tableData: [{
-              state: 'SA',
-              name: 'Q',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'W',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'E',
-              party: 'asdf',
-            }, {
-              state: 'SA',
-              name: 'R',
-              party: 'asdf',
-            }]
+            editObj: {
+              candidateName: '',
+              newParty: '',
+              party: '',
+            },AddObj: {
+              candidateName: '',
+              state: '',
+              party: '',
+              _csrf:""
+            },
+            tableData: [],
+            partyList:[]
           }
         },
+
+        async mounted() {
+
+          //get candidates
+          let response_2 = await hc.get("/api/candidates")
+          for (let i=0; i < response_2.data.candidates.length;i++) {
+            let temp = {
+              party: response_2.data.candidates[i].party,
+              candidateName:response_2.data.candidates[i].name,
+              state: response_2.data.candidates[i].state
+            }
+            this.tableData.push(temp)
+          }
+
+          //get partyList
+           let response = await hc.get('/api/party')
+           for (let i=0; i < response.data.party.length;i++) {
+             let temp = {
+               id: response.data.party[i].id,
+               party:response.data.party[i].partyName
+             }
+             this.partyList.push(temp)
+           }
+        },
+
         methods: {
           handleEdit(index, row) {
-           this.tableDataIndex=row;
-            this.editObj=index;
-            this.dialogFormVisible=true;
+            this.editDialogFormVisible=true;
+            this.editObj = row;
+            const oldParty = this.editObj.party;
+
+            this.editObj.party = oldParty;
+          },
+          handleAdd() {
+            //this.editObj=index;
+            this.addDialogFormVisible=true;
 
           },
-          editDo(){
-            let index=this.tableDataIndex;
-            //立即更改 若要交互 改成后台交互成功之后，再更新list
-            this.tableData[index]=this.editObj;
-            this.dialogFormVisible=false;
+          async addDO() {
+            let CsrfResponse = await hc.get("/api/csrf");
+            this.AddObj._csrf = CsrfResponse.data.csrfToken;
+            let res = await hc.post('/api/candidates', this.AddObj);
+            if(res.data.status === 'success'){
+              // add success
+              this.$message({
+                type: 'success',
+                message: 'Successfully!'
+              });
+              this.addDialogFormVisible = false;
+              // refresh current page
+              location.reload();
+            }else {
+              // add failed
+              this.$message({
+                type: 'error',
+                message: res.data.msg
+              });
+            }
           },
-          handleDelete(index, row){
-            console.log(index, row);
+          async editDo(){
+            let CsrfResponse = await hc.get("/api/csrf");
+            this.editObj._csrf = CsrfResponse.data.csrfToken;
+
+            let res = await hc.put('/api/candidates', this.editObj);
+            if(res.data.status === 'success'){
+              // add success
+              this.$message({
+                type: 'success',
+                message: 'Successfully!'
+              });
+              this.editDialogFormVisible = false;
+              // refresh current page
+              location.reload();
+            }else {
+              // add failed
+              this.$message({
+                type: 'error',
+                message: res.data.msg
+              });
+            }
+          },
+          async handleDelete(index, row){
+            let CsrfResponse = await hc.get("/api/csrf")
+            let _csrf = CsrfResponse.data.csrfToken;
+            let reqData = {
+              candidateName: row.candidateName,
+              party: row.party,
+                _csrf: _csrf
+            };
+
             this.$confirm('Are you sure to delete this item?', 'Notice', {
               confirmButtonText: 'Continue',
               cancelButtonText: 'Cancel',
               type: 'warning'
             }).then(() => {
-              this.$message({
-                type: 'success',
-                message: 'Successfully!'
-              });
+              // send delete request
+              hc.delete('/api/candidates/',reqData).then(() => {
+                this.$message({
+                  type: 'success',
+                  message: 'Success!'
+                });
+                // reload page
+                location.reload();
+              })
             }).catch(() => {
               this.$message({
                 type: 'info',
@@ -133,6 +249,16 @@
       }
       </script>
 
-      <style src="@/styles/ConsoleSidebar.css">
+      <style >
+.el-table{
 
+}
+.el-dialog{
+  width:60%;
+
+}
+*{
+  font-family:"Arial";
+
+}
       </style>
