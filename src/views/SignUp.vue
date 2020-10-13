@@ -4,31 +4,42 @@
     <div>
       <img align="center" src="../assets/adelaide logo.png"/>
     </div>
-    <h3 style="text-align: center;">Senate Voting System</h3>
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm signup-container">
+    <h1 style="text-align: center;">Senate Voting System</h1>
+  <el-form :model="user" :rules="rules" ref="ruleForm" class="demo-ruleForm signup-container">
     <h3 style="text-align: center;">User Sign Up</h3>
-    <el-form-item prop="user1">
-      <el-input type="text" placeholder="Email" required="required" v-model="ruleForm.user1" prefix-icon="el-icon-user-solid"></el-input>
+
+    <el-form-item prop="email">
+      <el-input type="text" placeholder="Email" required="required" v-model="user.email" prefix-icon="el-icon-user-solid"></el-input>
     </el-form-item>
-    <el-form-item prop="pass1">
-      <el-input class="phone-input" placeholder="Phone Number" v-model="ruleForm.pass1" prefix-icon="el-icon-mobile-phone"></el-input>
+
+    <el-form-item prop="phone number">
+      <el-input class="phone-input" placeholder="Phone Number" required="required" v-model="user.phoneNumber" prefix-icon="el-icon-mobile-phone"></el-input>
     </el-form-item>
-    <el-form-item prop="code" class="phone" v-show="yzmshow">
-      <el-input v-model="ruleForm.code" placeholder="验证码" :minlength="6" :maxlength="6"></el-input>
-      <el-button type="primary" @click="getCode()" class="code-btn" :disabled="!show">
-        <span v-show="show">发送验证码</span>
-        <span v-show="!show" class="count">{{ count }} s</span>
-      </el-button>
+
+    <el-form-item prop="passport">
+      <el-input class="passport-input" placeholder="Passport" required="required" v-model="user.passport" prefix-icon="el-icon-document"></el-input>
     </el-form-item>
-    <el-form-item prop="pass">
-      <el-input type="password" placeholder="Please enter password" v-model="ruleForm.pass" prefix-icon="el-icon-lock"></el-input>
+
+    <el-form-item prop="driverLicense">
+      <el-input class="driver-license-input" placeholder="Driver License" required="required" v-model="user.driverLicense" prefix-icon="el-icon-postcard"></el-input>
     </el-form-item>
-    <el-form-item prop="checkPass">
-      <el-input type="password" placeholder="Please enter password again" v-model="ruleForm.checkPass" prefix-icon="el-icon-lock"></el-input>
+
+    <el-form-item prop="birthday">
+      <el-date-picker class="birthday-input" placeholder="Please pick your birthday" required="required"  v-model="user.birthday" type="date" prefix-icon="el-icon-date"></el-date-picker>
+    </el-form-item>
+
+    <el-form-item prop="address">
+      <el-input class="address-input" placeholder="Address" required="required" v-model="user.address" prefix-icon="el-icon-house"></el-input>
+    </el-form-item>
+
+    <el-form-item prop="password">
+      <el-input type="password" placeholder="Please enter password" required="required" v-model="user.password" prefix-icon="el-icon-lock"></el-input>
+    </el-form-item>
+    <el-form-item prop="checkPassword">
+      <el-input type="password" placeholder="Please enter password again" required="required" v-model="user.checkPassword" prefix-icon="el-icon-lock"></el-input>
     </el-form-item>
     <el-form-item class="btn-form">
       <el-button type="primary" @click="submitLogin">Sign Up</el-button>
-      <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
     </el-form-item>
   </el-form>
   </div>
@@ -38,26 +49,26 @@
 <script>
 export default {
   data() {
-    var validateUser1 = async (rule, value, callback) => {
+    var validateEmail = async (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('Please enter an email'))
       } else {
         if (value) {
-          const res = await require().post('/api/user/checkUsernameExist', {
-            username: this.ruleForm.user1
+          this.$axios.get('/api/user', {
+            username: this.user.email
           })
-          console.log(res)
-          if (res.data.code === 20000) {
-            callback()
-          } else {
-            return callback(new Error('User name already taken'))
-          }
+          .then((response) =>{
+            if(response.status == 'success'){
+              callback(new Error('Email already in use'))
+            }
+          })
+          callback()
         }
       }
     }
-    var validatePass1 = async (rule, value, callback) => {
+    var validatePhoneNumber = async (rule, value, callback) => {
       if (value === '') {
-        callback(new Error("Phone number or email can't be blank"))
+        callback(new Error("Phone number can't be blank"))
       } else {
         const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
         // eslint-disable-next-line no-useless-escape
@@ -66,81 +77,99 @@ export default {
           this.yzmshow = true
           callback()
         } else {
-          callback(new Error('Please enter the correct phone number or password'))
+          callback(new Error('Please enter the correct phone number'))
         }
       }
     }
-    var validatePass = (rule, value, callback) => {
+    var validatePassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please enter password'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
+        if (this.user.checkPassword !== '') {
+          this.$refs.ruleForm.validateField('checkPassword', (password) => {
+            if(password.length < 6){
+              callback(new Error('Password need to be at least 6 digits'))
+            }else{
+              callback()
+            }
+          })
         }
         callback()
       }
     }
 
-    var validatePass2 = (rule, value, callback) => {
+    var validateSecondPassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please enter your password again'))
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.user.password) {
         callback(new Error("Password doesn't match"))
       } else {
         callback()
       }
     }
 
+    var validatePassport = (rule,value,callback) => {
+      if(value === ''){
+        callback(new Error('Please enter your passport number'))
+      }else{
+        callback()
+      }
+    }
+
     return {
       activeIndex: '2',
-      loginForm: {
-        mobile: '',
-        code: '',
-        zheCode: ''
+      user: {
+        email:'',
+        phoneNumber:'',
+        passport:'',
+        driverLicense:'',
+        address:'',
+        password:'',
+        checkPassword:'',
+        birthday: ''
       },
-      show: true,
-      count: '',
-      timer: null,
-      yzmshow: false,
+
+
+
       ruleForm: {
-        user1: '',
-        pass1: '',
-        pass: '',
-        checkPass: '',
-        zhecode: '',
-        mobile: '',
-        phoneCode: '',
-        emailCode: '',
-        code: ''
+        email: '',
+        phoneNumber: '',
+        password: '',
+        checkPassword: ''
       },
+
       rules: {
 
-        user1: [{
+        email: [{
           required: true,
-          validator: validateUser1,
+          validator: validateEmail,
           trigger: 'blur'
         }],
-        pass1: [{
+        phoneNumber: [{
           required: true,
-          validator: validatePass1,
+          validator: validatePhoneNumber,
+          trigger: 'blur'
+        }],
+        passport: [{
+          required: true,
+          validator: validatePassport,
           trigger: 'blur'
         }],
 
-        pass: [{
+        password: [{
           required: true,
-          validator: validatePass,
+          validator: validatePassword,
           trigger: 'blur'
         },
           {
             min: 6,
             message: 'Minimum 6 digit',
             trigger: 'blur'
-          }
-        ],
-        // 校验密码
-        checkPass: [{
+          }],
+
+        checkPassword: [{
           required: true,
-          validator: validatePass2,
+          validator: validateSecondPassword,
           trigger: 'blur'
         },
           {
@@ -154,6 +183,19 @@ export default {
   },
   methods:{
     submitLogin(){
+      this.$axios.post('api/user',{
+        email: this.user.email,
+        phoneNumber: this.user.password,
+        password: this.user.password
+      })
+      .then((response) => {
+        if(response.status === 'success'){
+          alert("successful sign up!")
+        }else{
+          alert("Sign up unsuccessful !")
+        }
+      })
+
 
     }
   }

@@ -5,22 +5,26 @@
     <img align="center" src="../assets/adelaide logo.png"/>
     </div>
     <h3 style="text-align: center;">Senate Voting System</h3>
-    <el-form :model="ruleForm" label-width="100px" class="demo-ruleForm login-container">
+    <el-form  label-width="100px" class="login-container">
       <h3 style="text-align: center;">User Login</h3>
-  <el-form class="login-form" status-icon :rules="loginRules" ref="loginForm" :model="loginForm" label-width="0" login>
-    <el-form-item prop="username" label="Email">
-      <el-input size="small" @keyup.enter.native="handleLogin" v-model="loginForm.username" auto-complete="off" placeholder="Please enter Email">
+  <el-form class="login-form" status-icon :rules="loginRules" ref="ruleForm" :model="ruleForm" label-width="0" login>
+
+    <el-form-item prop="email" label="Email">
+      <el-input size="small" @keyup.enter.native="handleLogin" v-model="ruleForm.email" auto-complete="off" placeholder="Please enter Email">
       </el-input>
     </el-form-item>
+
     <el-form-item prop="password" label="Password">
-      <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="loginForm.password" auto-complete="off" placeholder="Please enter Password">
+      <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="ruleForm.password" auto-complete="off" placeholder="Please enter Password">
         <i class="el-icon-view el-input__icon" :style="fontstyle" slot="suffix" @click="showPassword"></i>
         <i slot="prefix" class="icon-mima"></i>
       </el-input>
     </el-form-item>
+
     <el-form-item  prop="verifycode" label="CAPTCHA">
-      <el-input v-model="loginForm.verifycode" placeholder="Please enter CAPTCHA code" class="identifyinput"></el-input>
+      <el-input v-model="ruleForm.verifycode" placeholder="Please enter CAPTCHA code" class="identifyinput"></el-input>
     </el-form-item>
+
     <el-form-item>
       <div class="identifybox">
         <div @click="refreshCode">
@@ -29,10 +33,12 @@
         <el-button @click="refreshCode" type='text' class="textbtn">Can't see? Refresh</el-button>
       </div>
     </el-form-item>
+
     <el-checkbox v-model="checked">Remember Password</el-checkbox>
     <el-form-item>
-      <el-button style="text-align: center;" type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">Login</el-button>
+      <el-button style="text-align: center;" type="primary" size="small" @submit.prevent="handleLogin" class="login-submit">Login</el-button>
     </el-form-item>
+
   </el-form>
     </el-form>
   </div>
@@ -49,7 +55,7 @@ export default {
       if (value === "") {
         callback(new Error("Email can't be empty"))
       } else {
-        console.log('user', value)
+        console.log('email', value)
         callback()
       }
     }
@@ -66,14 +72,15 @@ export default {
     return {
       fontstyle: {
       },
-      loginForm: {
-        email: 'bob@outlook.com',
-        password: 'bob321123',
+      ruleForm: {
+        email: '',
+        password: '',
         verifycode: ''
       },
       checked: false,
       identifyCodes: '1234567890',
       identifyCode: '',
+
       loginRules: {
         email: [
           { required: true, trigger: 'blur', validator: validateUsername }
@@ -113,16 +120,15 @@ export default {
     only test for now
      */
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$.ruleForm.validate(valid => {
         if (valid) {
-          axios.post('/login',{
-            user: this.loginForm.user,
-            pass: this.loginForm.pass
+          axios.get('/api/login',{
+            email: this.email,
+            password: this.password
           })
           .then((response) => {
-            if(response.status === 200) {
-              this.$store.commit('SET_TOKEN',response.data.token)
-              this.$store.commit('GET_USER',response.data.user)
+            //console.log(response)
+            if(response.status === 'success') {
               this.$message({
                 message:"Successfully Login",
                 type:"Success"
