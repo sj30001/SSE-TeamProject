@@ -26,7 +26,7 @@
         </el-table-column><el-table-column
           label="Phone number"
           width="180"
-          prop="States">
+          prop="phone">
         <template slot-scope="scope">
 
           <span>{{ scope.row.phone }}</span>
@@ -35,7 +35,7 @@
         <el-table-column
             label="address"
             width="180"
-            prop="name">
+            prop="address">
           <template slot-scope="scope">
             <span><a href="javascript:;"></a>{{ scope.row.address }}</span>
           </template>
