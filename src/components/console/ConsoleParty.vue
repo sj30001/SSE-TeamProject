@@ -3,7 +3,7 @@
 
     <div>
       <el-button
-          size="mini"
+          size="medium"
           @click="handleAdd()">Add</el-button>
       <el-table
           :data="partyList" style="width: 60%">

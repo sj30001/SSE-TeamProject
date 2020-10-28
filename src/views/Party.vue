@@ -47,13 +47,13 @@ name: "Party",
   background-color: white;
   color: #333;
   text-align: center;
-  line-height: 200px;
+
   position:absolute;
 
   top:22%;
   width:60%;
   z-index:2;
-  left:40%
+  left:25%
 
 }
 .el-aside {

@@ -47,13 +47,14 @@ name: "Candidate",
   background-color: white;
   color: #333;
   text-align: center;
-  line-height: 200px;
+
   position:absolute;
 
-  top:25%;
+
+  top:23%;
   width:60%;
   z-index:2;
-left:40%
+left:30%
 
 }
 .el-aside {

@@ -2,11 +2,10 @@
   <div>
 <!--    <div style="background-color:#5B7B9E;padding:40px;margin-bottom:0px;width:90%"></div>-->
     <div>
-      <el-button
-          size="mini"
+      <div class="addButton" style="text-align: center;"><el-button
+          size="medium"
 
-
-          @click="handleAdd()">Add</el-button>
+          @click="handleAdd()">Add</el-button></div>
       <el-table
           :data="tableData" style="width:70%;float:left">
         <el-table-column
