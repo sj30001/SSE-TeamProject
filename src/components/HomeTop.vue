@@ -13,12 +13,11 @@
     font-size="30px"
     text-color="white"
             >
-      <el-menu-item style="text-align:center;width:16%;font-size:24px; " index="0">Home</el-menu-item>
-      <el-menu-item style="text-align:center;width:17%;font-size:24px" index="1">User </el-menu-item>
-      <el-menu-item style="text-align:center;width:16%;font-size:24px" index="2">Voting page</el-menu-item>
-      <el-menu-item style="text-align:center;width:17%;font-size:24px" index="3">Candidate information</el-menu-item>
-      <el-menu-item style="text-align:center;width:16%;font-size:24px" index="4">Voting rule</el-menu-item>
-      <el-menu-item style="text-align:center;font-size:24px;width:18%" index="5">Result page</el-menu-item>
+      <el-menu-item style="text-align:center;width:20%;font-size:24px; " index="0"><router-link to="/">Home</router-link></el-menu-item>
+      <el-menu-item style="text-align:center;width:20%;font-size:24px" index="1"><router-link to="/vote">Voting page</router-link></el-menu-item>
+      <el-menu-item style="text-align:center;width:20%;font-size:24px" index="2"><router-link to="/vote">Candidate information</router-link></el-menu-item>
+      <el-menu-item style="text-align:center;width:20%;font-size:24px" index="3"><router-link to="/vote">Voting rule</router-link></el-menu-item>
+      <el-menu-item style="text-align:center;font-size:24px;width:20%" index="4"><router-link to="/result">Result page</router-link></el-menu-item>
 
     </el-menu>
     <div>
@@ -75,6 +74,6 @@ name: "HomeTop"
 }
 *{
   font-family:"Arial";
-
+text-decoration:none;
 }
 </style>

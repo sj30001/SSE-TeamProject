@@ -19,8 +19,8 @@
           </h2>
           <div class="text2">
             <router-link to="/login"><el-button class="signin" type="text">Sign in ></el-button></router-link>
-            <el-button class="voting" type="text">Voting ></el-button>
-            <el-button class="result" type="text">Result ></el-button>
+            <router-link to="/vote"><el-button class="voting" type="text">Voting ></el-button></router-link>
+            <router-link to="/result"><el-button class="result" type="text">Result ></el-button></router-link>
           </div>
           <div >
             <img src="@/assets/voting.png"  alt="voting" class="image">
@@ -107,7 +107,7 @@ top:54%;
   font-size:24px;
   position:absolute;
   top:74%;
-  left:19.7%;
+  left:20%;
 }
 *{
   font-family:"Arial";

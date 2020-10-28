@@ -1,8 +1,8 @@
 <template>
   <div>
-<div class="TopTable">
+<div class="TopTable" style="width:100% !important">
   <el-row :gutter="20">
-    <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
+    <el-col :span="3"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%;"><h2 style="font-size:18px;padding:1%"> You may<br> vote in one of<br> two ways</h2>
       <h2>Either ></h2>
       <h2 style="font-size:14px;">Above the line</h2>
@@ -14,6 +14,7 @@
       </div>
     </div>
     </el-col>
+
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>A</h2>
 
@@ -167,11 +168,11 @@
     </div></el-col>
   </el-row>
 </div>
-    <div class="line" style="position:absolute;top:27.5%;width:75%;background-color: #5B7B9E;left:0%;height:1%"></div>
+    <div class="line" style="position:absolute;top:42%;width:75%;background-color: #5B7B9E;left:2%;height:1%"></div>
 <!--    BottomTable-->
     <div class="BottomTable">
       <el-row :gutter="20">
-        <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
+        <el-col :span="3"><div class="grid-content bg-purple" style="height:330px">
           <div style="padding:1%;">
             <h2>Or ></h2>
             <h2 style="font-size:14px;">Below the line</h2>
