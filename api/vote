@@ -1,0 +1,35 @@
+Post URL: /api/ballots
+Above request:
+{
+    "csrfToken":"",
+    "type":"above",
+    "preferences":{
+        "1":"D",
+        "2":"C",
+        "3":"A",
+        "4":"E",
+        "5":"B",
+        "6":"F"
+    }
+}
+
+Below request:
+
+{
+    "csrfToken":"",
+    "type":"below",
+    "preferences":{
+        "1":"10",
+        "2":"24",
+        "3":"5",
+        "4":"7",
+        "5":"2",
+        "6":"22",
+        "7":"43",
+        "8":"16",
+        "9":"1",
+        "10":"4",
+        "11":"9",
+        "12":"25"
+    }
+}
