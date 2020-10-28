@@ -17,25 +17,25 @@
         <!--        </el-table-column>-->
 
         <el-table-column
-            label="User Name"
+            label="Name"
             width="180"
-            prop="name">
+            prop="tableData.userName">
           <template slot-scope="scope">
             <span><a href="javascript:;"></a>{{ scope.row.name }}</span>
           </template>
         </el-table-column><el-table-column
           label="Phone number"
           width="180"
-          prop="phone">
+          prop="tableData.phoneNumber">
         <template slot-scope="scope">
 
-          <span>{{ scope.row.phone }}</span>
+          <span>{{ scope.row.phoneNumber }}</span>
         </template>
       </el-table-column>
         <el-table-column
             label="address"
             width="180"
-            prop="address">
+            prop="tableData.address">
           <template slot-scope="scope">
             <span><a href="javascript:;"></a>{{ scope.row.address }}</span>
           </template>
@@ -45,10 +45,7 @@
             <el-button
                 size="mini"
                 @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-            <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+
           </template>
         </el-table-column>
       </el-table>
@@ -82,15 +79,14 @@
           <el-form-item label="password update">
             <el-input v-model="editObj.password" auto-complete="off"></el-input>
           </el-form-item>
+
           <el-form-item label="Address update">
             <el-input v-model="editObj.address" auto-complete="off"></el-input>
           </el-form-item>
-          <el-select v-model="userName" placeholder="party">
-            <el-option v-for="item in userList "
-                       :key="item.userName"
-                       :label="item.userName"
-                       :value="item.userName"></el-option>
-          </el-select>
+          <el-form-item label="Phone Number update">
+            <el-input v-model="editObj.phoneNumber" auto-complete="off"></el-input>
+          </el-form-item>
+
         </el-form>
         <div sloy="footer" class="dialog-footer" >
           <br>
@@ -104,6 +100,7 @@
 </template>
 
 <script>
+const hc = require('@/utils/httpconnect')
 export default {
 name: "ConsoleUser",
   data() {
@@ -114,56 +111,74 @@ name: "ConsoleUser",
       editObj: {
         password: '',
         address: '',
-
-      },AddObj: {
+        phoneNumber: '',
+        id: '',
+        _csrf: '',
+      },
+      AddObj: {
         password: '',
         address: '',
         _csrf:""
       },
       tableData: [],
-      partyList:[]
+
     }
+  },
+
+  async mounted() {
+    //get partyList
+    let response = await hc.get('/api/users/21')
+    let temp = {
+        name: response.data.user.name,
+        phoneNumber: response.data.user.phoneNumber,
+        address: response.data.user.address,
+        id:response.data.user.id
+    }
+    this.tableData.push(temp)
+    console.log(temp)
+
+    console.log(response.data)
   },
 
 
 
   methods: {
     handleEdit(index, row) {
-      this.tableDataIndex=row;
-      //this.editObj=index;
       this.editDialogFormVisible=true;
+      this.editObj = row;
+      const oldAddress = this.editObj.address;
+      this.editObj.address = oldAddress;
+      const oldPhoneNumber = this.editObj.phoneNumber;
+      this.editObj.phoneNumber = oldPhoneNumber;
+      const oldId = this.tableData[0].id
+      this.editObj.id = oldId;
+
 
     },
-    handleAdd() {
-      //this.editObj=index;
-      this.addDialogFormVisible=true;
 
-    },
-
-    editDo(){
-      let index=this.tableDataIndex;
-      //立即更改 若要交互 改成后台交互成功之后，再更新list
-      this.tableData[index]=this.editObj;
-      this.editDialogFormVisible=false;
-    },
-    handleDelete(index, row){
-      console.log(index, row);
-      this.$confirm('Are you sure to delete this item?', 'Notice', {
-        confirmButtonText: 'Continue',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
-      }).then(() => {
+    async editDo(){
+      let CsrfResponse = await hc.get("/api/csrf");
+      this.editObj._csrf = CsrfResponse.data.csrfToken;
+      //this.editObj.id = this.tableData.id;
+      console.log(this.editObj);
+      let res = await hc.put('/api/users', this.editObj);
+      if(res.data.status === 'success'){
+        // add success
         this.$message({
           type: 'success',
           message: 'Successfully!'
         });
-      }).catch(() => {
+        this.editDialogFormVisible = false;
+        // refresh current page
+        location.reload();
+      }else {
+        // add failed
         this.$message({
-          type: 'info',
-          message: 'cancel'
+          type: 'error',
+          message: res.data.msg
         });
-      });
-    },
+      }
+    }
 
   }
 }
