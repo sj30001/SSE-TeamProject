@@ -1,45 +1,119 @@
-
+|name | string |
+|birthday | string |
+|passport|int|
+|driverLicense|string
+|address|string
+|password|string
+|email|string
+|phoneNumber|int
 <template>
   <div class="signup-wrap">
     <div>
       <img align="center" src="../assets/adelaide logo.png"/>
     </div>
     <h1 style="text-align: center;">Senate Voting System</h1>
-  <el-form :model="user" :rules="rules" ref="ruleForm" class="demo-ruleForm signup-container">
+  <el-form :model="user" :rules="rules" ref="ruleForm" class="signup-container">
     <h3 style="text-align: center;">User Sign Up</h3>
 
     <el-form-item prop="email">
-      <el-input type="text" placeholder="Email" required="required" v-model="user.email" prefix-icon="el-icon-user-solid"></el-input>
+      <el-input
+          type="text"
+          placeholder="Email"
+          required="required"
+          v-model="user.email"
+          prefix-icon="el-icon-user-solid">
+      </el-input>
+    </el-form-item>
+
+    <el-form-item prop="name">
+      <el-input
+      type="text"
+      placeholder="Name"
+      required="required"
+      v-model="user.name"
+      >
+
+      </el-input>
     </el-form-item>
 
     <el-form-item prop="phone number">
-      <el-input class="phone-input" placeholder="Phone Number" required="required" v-model="user.phoneNumber" prefix-icon="el-icon-mobile-phone"></el-input>
+      <el-input
+          onkeyup="value=value.replace(/[^\d]/g,'')"
+          onblur="vvalue=value.replace(/[^\d]/g,'')"
+          ng-model="schedule.round"
+          class="phone-input"
+          placeholder="Phone Number"
+          required="required"
+          v-model="user.phoneNumber"
+          prefix-icon="el-icon-mobile-phone">
+      </el-input>
     </el-form-item>
 
     <el-form-item prop="passport">
-      <el-input class="passport-input" placeholder="Passport" required="required" v-model="user.passport" prefix-icon="el-icon-document"></el-input>
+      <el-input
+          class="passport-input"
+          placeholder="Passport"
+          required="required"
+          v-model="user.passport"
+          prefix-icon="el-icon-document">
+      </el-input>
     </el-form-item>
 
     <el-form-item prop="driverLicense">
-      <el-input class="driver-license-input" placeholder="Driver License" required="required" v-model="user.driverLicense" prefix-icon="el-icon-postcard"></el-input>
+      <el-input
+          class="driver-license-input"
+          placeholder="Driver License"
+          required="required"
+          v-model="user.driverLicense"
+          prefix-icon="el-icon-postcard">
+      </el-input>
     </el-form-item>
 
     <el-form-item prop="birthday">
-      <el-date-picker class="birthday-input" placeholder="Please pick your birthday" required="required"  v-model="user.birthday" type="date" prefix-icon="el-icon-date"></el-date-picker>
+      <el-date-picker
+          class="birthday-input"
+          placeholder="Please pick your birthday"
+          required="required"
+          v-model="user.birthday"
+          type="date"
+          prefix-icon="el-icon-date">
+      </el-date-picker>
     </el-form-item>
 
     <el-form-item prop="address">
-      <el-input class="address-input" placeholder="Address" required="required" v-model="user.address" prefix-icon="el-icon-house"></el-input>
+      <el-input
+          class="address-input"
+          placeholder="Address"
+          required="required"
+          v-model="user.address"
+          prefix-icon="el-icon-house">
+      </el-input>
     </el-form-item>
 
     <el-form-item prop="password">
-      <el-input type="password" placeholder="Please enter password" required="required" v-model="user.password" prefix-icon="el-icon-lock"></el-input>
+      <el-input
+          type="password"
+          placeholder="Please enter password"
+          required="required"
+          v-model="user.password"
+          prefix-icon="el-icon-lock">
+      </el-input>
     </el-form-item>
-    <el-form-item prop="checkPassword">
-      <el-input type="password" placeholder="Please enter password again" required="required" v-model="user.checkPassword" prefix-icon="el-icon-lock"></el-input>
+
+    <el-form-item prop= "">
+      <el-input
+          type="password"
+          placeholder="Please enter password again"
+          required="required"
+          v-model="user.checkPassword"
+          prefix-icon="el-icon-lock">
+      </el-input>
     </el-form-item>
+
     <el-form-item class="btn-form">
-      <el-button type="primary" @click="submitLogin">Sign Up</el-button>
+      <el-button
+          type="primary"
+          @click="submitLogin">Sign Up</el-button>
     </el-form-item>
   </el-form>
   </div>
@@ -47,25 +121,27 @@
 
 
 <script>
+const hc = require('@/utils/httpconnect')
 export default {
   data() {
+
+    var validateName = async (rule, value, callback) => {
+      if(value === ''){
+        callback(new Error('Please enter your name'))
+      }else{
+        callback()
+      }
+    }
+
     var validateEmail = async (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please enter an email'))
-      } else {
-        if (value) {
-          this.$axios.get('/api/user', {
-            username: this.user.email
-          })
-          .then((response) =>{
-            if(response.status == 'success'){
-              callback(new Error('Email already in use'))
-            }
-          })
-          callback()
-        }
+      }else{
+        callback()
       }
+
     }
+
     var validatePhoneNumber = async (rule, value, callback) => {
       if (value === '') {
         callback(new Error("Phone number can't be blank"))
@@ -74,19 +150,19 @@ export default {
         // eslint-disable-next-line no-useless-escape
         const reg2 = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
         if ((reg.test(value) || reg2.test(value))) {
-          this.yzmshow = true
           callback()
         } else {
           callback(new Error('Please enter the correct phone number'))
         }
       }
     }
+
     var validatePassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please enter password'))
       } else {
-        if (this.user.checkPassword !== '') {
-          this.$refs.ruleForm.validateField('checkPassword', (password) => {
+        if (this.checkPassword !== '') {
+          this.$refs.ruleForm.validateField(this.checkPassword, (password) => {
             if(password.length < 6){
               callback(new Error('Password need to be at least 6 digits'))
             }else{
@@ -102,6 +178,8 @@ export default {
       if (value === '') {
         callback(new Error('Please enter your password again'))
       } else if (value !== this.user.password) {
+        console.log(this.user.password)
+        console.log(this.checkPassword)
         callback(new Error("Password doesn't match"))
       } else {
         callback()
@@ -117,28 +195,39 @@ export default {
     }
 
     return {
-      activeIndex: '2',
       user: {
-        email:'',
-        phoneNumber:'',
+        name:'',
+        birthday: '',
         passport:'',
         driverLicense:'',
         address:'',
         password:'',
-        checkPassword:'',
-        birthday: ''
+        email:'',
+        phoneNumber:'',
+        checkPassword:''
       },
+
+
+
+
 
 
 
       ruleForm: {
-        email: '',
-        phoneNumber: '',
-        password: '',
-        checkPassword: ''
+        email:'',
+        phoneNumber:'',
+        password:'',
+        checkPassword:''
       },
 
+
       rules: {
+
+        name:[{
+          required: true,
+          validator:validateName,
+          trigger:'blur'
+        }],
 
         email: [{
           required: true,
@@ -182,19 +271,14 @@ export default {
     }
   },
   methods:{
-    submitLogin(){
-      this.$axios.post('api/user',{
-        email: this.user.email,
-        phoneNumber: this.user.password,
-        password: this.user.password
-      })
-      .then((response) => {
-        if(response.status === 'success'){
-          alert("successful sign up!")
-        }else{
-          alert("Sign up unsuccessful !")
-        }
-      })
+    async submitLogin(){
+      let res =  await hc.post('api/user',this.user)
+      if(res.data.status === 'success'){
+        console.log("success")
+      }else{
+        console.log("fail")
+      }
+
 
 
     }

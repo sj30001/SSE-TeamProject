@@ -10,19 +10,43 @@
   <el-form class="login-form" status-icon :rules="loginRules" ref="ruleForm" :model="ruleForm" label-width="0" login>
 
     <el-form-item prop="email" label="Email">
-      <el-input size="small" @keyup.enter.native="handleLogin" v-model="ruleForm.email" auto-complete="off" placeholder="Please enter Email">
+      <el-input
+          size="small"
+          @keyup.enter.native="handleLogin"
+          v-model="ruleForm.email"
+          auto-complete="off"
+          placeholder="Please enter Email">
       </el-input>
     </el-form-item>
 
     <el-form-item prop="password" label="Password">
-      <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="ruleForm.password" auto-complete="off" placeholder="Please enter Password">
-        <i class="el-icon-view el-input__icon" :style="fontstyle" slot="suffix" @click="showPassword"></i>
-        <i slot="prefix" class="icon-mima"></i>
+      <el-input
+          size="small"
+          @keyup.enter.native="handleLogin"
+          :type="passwordType"
+          v-model="ruleForm.password"
+          auto-complete="off"
+          placeholder="Please enter Password">
+        <i
+            class="el-icon-view el-input__icon"
+            :style="fontstyle"
+            slot="suffix"
+            @click="showPassword">
+
+        </i>
+        <i
+            slot="prefix"
+            class="icon-mima">
+        </i>
       </el-input>
     </el-form-item>
 
     <el-form-item  prop="verifycode" label="CAPTCHA">
-      <el-input v-model="ruleForm.verifycode" placeholder="Please enter CAPTCHA code" class="identifyinput"></el-input>
+      <el-input
+          v-model="ruleForm.verifycode"
+          placeholder="Please enter CAPTCHA code"
+          class="identifyinput">
+      </el-input>
     </el-form-item>
 
     <el-form-item>
@@ -30,13 +54,20 @@
         <div @click="refreshCode">
           <s-identify :identifyCode="identifyCode"></s-identify>
         </div>
-        <el-button @click="refreshCode" type='text' class="textbtn">Can't see? Refresh</el-button>
+        <el-button
+            @click="refreshCode"
+            type='text'
+            class="textbtn">Can't see? Refresh</el-button>
       </div>
     </el-form-item>
 
     <el-checkbox v-model="checked">Remember Password</el-checkbox>
     <el-form-item>
-      <el-button style="text-align: center;" type="primary" size="small" @submit.prevent="handleLogin" class="login-submit">Login</el-button>
+      <el-button
+          style="text-align: center;"
+          type="primary" size="small"
+          @submit.prevent="handleLogin"
+          class="login-submit">Login</el-button>
     </el-form-item>
 
   </el-form>
@@ -47,7 +78,7 @@
 
 <script>
 import SIdentify from '@/components/identify.vue'
-import axios from '@/api/http'
+const hc = require('@/utils/httpconnect')
 export default {
   name: 'login',
   data() {
@@ -69,6 +100,7 @@ export default {
         callback()
       }
     }
+
     return {
       fontstyle: {
       },
@@ -122,7 +154,7 @@ export default {
     handleLogin() {
       this.$.ruleForm.validate(valid => {
         if (valid) {
-          axios.get('/api/login',{
+          hc.get('/api/login',{
             email: this.email,
             password: this.password
           })
