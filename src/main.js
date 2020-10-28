@@ -4,14 +4,12 @@ import router from './router'
 import axios from '@/api/http'
 import VueAxios from "vue-axios";
 import store from './store/index'
-
-
-
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueCookies from 'vue-cookies'
+import {VueReCaptcha} from "vue-recaptcha-v3";
 
-
+Vue.use(VueReCaptcha, { siteKey: '6LeYV9wZAAAAAHM53hnx2i5oBtAPldmUbwmcyb6m'});
 Vue.use(VueAxios,axios)
 Vue.use(ElementUI);
 Vue.use(VueCookies);
