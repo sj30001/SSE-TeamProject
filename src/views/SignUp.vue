@@ -272,15 +272,20 @@ export default {
   },
   methods:{
     async submitLogin(){
-      let res =  await hc.post('api/user',this.user)
-      if(res.data.status === 'success'){
-        console.log("success")
-      }else{
-        console.log("fail")
+      let user = this.user;
+      delete user.checkPassword;
+      user.birthday = new Date(user.birthday);
+      user.birthday = user.birthday.getFullYear()+'-'+user.birthday.getMonth()+'-'+user.birthday.getDay();
+      let response = await hc.post('/api/users',user);
+
+      if(response.data.status ==='success') {
+        //success and redirect
+        this.$message.success('Successfully signed up!');
+        await this.$router.push({path: '/login'});
       }
-
-
-
+      else if(response.data.status ==='error')
+          //error flash
+        this.$message.error(response.data.msg);
     }
   }
 }
