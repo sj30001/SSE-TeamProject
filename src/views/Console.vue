@@ -36,6 +36,10 @@ export default {
   components: { ConsoleSidebar, ConsoleTop},
   data() {
     return {}
+  },async mounted() {
+    let role = this.$cookies.get('role');
+    if(role !== 'admin')
+      await this.$router.push({path: '/login'});
   },
   methods: {}
 

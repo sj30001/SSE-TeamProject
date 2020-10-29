@@ -46,11 +46,11 @@ background-color="#5B7B9E"
           max-width="300px"
           width="300px"
       >
-       <router-link to="/console" class="a"><el-menu-item index="1" >
+       <router-link v-show="isAdmin" to="/console" class="a"><el-menu-item index="1" >
           <i class="el-icon-menu"></i>
           <span slot="title">Home</span>
         </el-menu-item></router-link>
-        <el-submenu index="2" >
+        <el-submenu v-show="isAdmin" index="2" >
           <template slot="title" >
             <i class="el-icon-location"></i>
             <span>Information Update</span>
@@ -63,7 +63,7 @@ background-color="#5B7B9E"
           </el-menu-item-group>
 
         </el-submenu>
-        <router-link to="/user" class="a"><el-menu-item index="3">
+        <router-link v-show="isUser" to="/user" class="a"><el-menu-item index="3">
           <i class="el-icon-document"></i>
          <span slot="title">User Update</span>
         </el-menu-item></router-link>
@@ -84,17 +84,20 @@ export default {
   name: "ConsoleSidebar",
   data() {
     return {
+      isAdmin: false,
+      isUser: false,
       isCollapse: true
     };
+  },mounted() {
+    let role = this.$cookies.get('role');
+    //user
+    if(role ==='user')
+      this.isUser = true;
+    //admin
+    if(role ==='admin')
+      this.isAdmin = true;
   },
-  // methods: {
-  //   handleOpen(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   },
-  //   handleClose(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   }
-  // }
+
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
