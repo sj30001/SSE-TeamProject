@@ -53,6 +53,13 @@ name: "Login",
 
       }
     };
+  },async mounted(){
+    let role = this.$cookies.get('role');
+    if(role==='user'){
+      await this.$router.push({path: '/user'});
+    }else if (role==='admin'){
+      await this.$router.push({path:'/console'});
+    }
   },
   methods: {
     submitForm(formName) {
