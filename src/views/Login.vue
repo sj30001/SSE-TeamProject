@@ -67,7 +67,7 @@
           style="text-align: center;"
           type="primary" size="small"
           @submit.prevent="handleLogin"
-          class="login-submit">Login</el-button>
+          class="handleLogin">Login</el-button>
     </el-form-item>
 
   </el-form>
