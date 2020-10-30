@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table" >
 <div class="TopTable" style="width:100% !important">
   <el-row :gutter="20">
     <el-col :span="3"><div class="grid-content bg-purple" style="height:250px">
@@ -168,7 +168,7 @@
     </div></el-col>
   </el-row>
 </div>
-    <div class="line" style="position:absolute;top:42%;width:75%;background-color: #5B7B9E;left:2%;height:1%"></div>
+    <div class="line" style="position:absolute;top:29%;width:75%;background-color: #5B7B9E;left:2%;height:1%"></div>
 <!--    BottomTable-->
     <div class="BottomTable">
       <el-row :gutter="20">
@@ -407,7 +407,15 @@
                   </el-select>
                 </div>
               </div>
-            </div>
+
+            </div><el-popconfirm
+                title="Are you sure to submit"
+                confirm-button-text="Submit"
+                cancel-button-text="Cancel"
+                style="position:absolute;top:105%;right:22%"
+            >
+              <el-button slot="reference">submit</el-button>
+            </el-popconfirm>
           </div>
         </div></el-col>
       </el-row>

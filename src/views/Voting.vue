@@ -5,6 +5,7 @@
     </el-header>
     <el-main>
       <VotingTable/>
+
     </el-main>
   </el-container>
 </template>
@@ -36,9 +37,12 @@ methods: {}
 }
 .el-main{
   position:absolute;
-  top:30%;
+  top:20%;
   left:15%;
   width:82%;
+  height:100%;
+
+
 
 }
 *{
