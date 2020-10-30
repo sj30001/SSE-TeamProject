@@ -107,7 +107,7 @@ export default {
       ruleForm: {
         email: '',
         password: '',
-        verifycode: ''
+        verifyCode: ''
       },
       checked: false,
       identifyCodes: '1234567890',
@@ -151,31 +151,22 @@ export default {
     get user data from backend with axios
     only test for now
      */
-    handleLogin() {
-      this.$.ruleForm.validate(valid => {
-        if (valid) {
-          hc.get('/api/login',{
-            email: this.email,
-            password: this.password
-          })
-          .then((response) => {
-            //console.log(response)
-            if(response.status === 'success') {
-              this.$message({
-                message:"Successfully Login",
-                type:"Success"
-              })
-              this.$router.push({name: 'Home'})
-            }
-          })
-          .catch(function(error){
-            console.log(error)
-          })
-        }else{
-          console.log('error submit')
-          return false
+    async handleLogin() {
+      console.log(this.ruleForm);
+        let res = await hc.post('/api/login', this.ruleForm);
+        console.log(res);
+        if(res.data.status === 'success'){
+          // login success
+
+          // redirect to console page
+          await this.$router.push({path: '/console'});
+        }else {
+          // login failed
+          this.$message({
+            type: 'error',
+            message: res.data.msg
+          });
         }
-      })
     },
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min)

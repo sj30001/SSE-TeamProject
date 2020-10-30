@@ -126,8 +126,13 @@ name: "ConsoleUser",
   },
 
   async mounted() {
+
+    let role = this.$cookies.get('role');
+    if(role !== 'user')
+      await this.$router.push({path: '/login'});
+
     //get partyList
-    let response = await hc.get('/api/users/21')
+    let response = await hc.get('/api/users/'+this.$cookies.get('id'));
     let temp = {
         name: response.data.user.name,
         phoneNumber: response.data.user.phoneNumber,

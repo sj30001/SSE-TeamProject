@@ -133,6 +133,9 @@
         },
 
         async mounted() {
+          let role = this.$cookies.get('role');
+          if(role !== 'admin')
+            await this.$router.push({path: '/login'});
 
           //get candidates
           let response_2 = await hc.get("/api/candidates")

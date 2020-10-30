@@ -106,6 +106,10 @@ export default {
   },
 
   async mounted() {
+    let role = this.$cookies.get('role');
+    if(role !== 'admin')
+      await this.$router.push({path: '/login'});
+
     //get partyList
     let response = await hc.get('/api/party')
     for (let i=0; i < response.data.party.length;i++) {
