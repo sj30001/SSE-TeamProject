@@ -167,11 +167,11 @@
 
             this.editObj.party = oldParty;
           },
-          handleAdd() {
+          //handleAdd() {
             //this.editObj=index;
-            this.addDialogFormVisible=true;
+            //this.addDialogFormVisible=true;
 
-          },
+          //},
           async addDO() {
             let CsrfResponse = await hc.get("/api/csrf");
             this.AddObj._csrf = CsrfResponse.data.csrfToken;

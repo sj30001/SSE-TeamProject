@@ -64,6 +64,7 @@
 </template>
 
 <script>
+const hc = require('@/utils/httpconnect')
 export default {
 name: "Result",
 
@@ -89,18 +90,38 @@ name: "Result",
       partyList:[]
     }
 },
+  async mounted(){
+  let response = await hc.get("/api/results")
+    response.data.results.sort(compare('order_elected'))
+
+    for(let i = 0; i < response.data.results.length; i++){
+      let temp = {
+        name: response.data.results[i].senator,
+        state: response.data.results[i].state,
+        party: response.data.results[i].party,
+        order: response.data.results[i].order_elected
+      }
+      this.tableData.push(temp)
+    }
+    function compare(property){
+      return function (obj1,obj2){
+        return obj1[property]-obj2[property];
+      }
+    }
+
+  },
   methods: {
-    // handleEdit(index, row) {
-    //   this.tableDataIndex=row;
-    //   //this.editObj=index;
-    //   this.editDialogFormVisible=true;
-    //
-    // },
-    // handleAdd() {
-    //   //this.editObj=index;
-    //   this.addDialogFormVisible=true;
-    //
-    // },
+     handleEdit(index, row) {
+       this.tableDataIndex=row;
+       //this.editObj=index;
+       this.editDialogFormVisible=true;
+
+     },
+     //handleAdd() {
+       //this.editObj=index;
+       //this.addDialogFormVisible=true;
+
+     //},
 
     editDo(){
       let index=this.tableDataIndex;
@@ -108,24 +129,26 @@ name: "Result",
       this.tableData[index]=this.editObj;
       this.editDialogFormVisible=false;
     },
-    // handleDelete(index, row){
-    //   console.log(index, row);
-    //   this.$confirm('Are you sure to delete this item?', 'Notice', {
-    //     confirmButtonText: 'Continue',
-    //     cancelButtonText: 'Cancel',
-    //     type: 'warning'
-    //   }).then(() => {
-    //     this.$message({
-    //       type: 'success',
-    //       message: 'Successfully!'
-    //     });
-    //   }).catch(() => {
-    //     this.$message({
-    //       type: 'info',
-    //       message: 'cancel'
-    //     });
-    //   });
-    // },
+     handleDelete(index, row){
+       console.log(index, row);
+       this.$confirm('Are you sure to delete this item?', 'Notice', {
+         confirmButtonText: 'Continue',
+         cancelButtonText: 'Cancel',
+         type: 'warning'
+       }).then(() => {
+         this.$message({
+           type: 'success',
+           message: 'Successfully!'
+         });
+       }).catch(() => {
+         this.$message({
+           type: 'info',
+           message: 'cancel'
+         });
+       });
+     },
+
+
 
   }
 }

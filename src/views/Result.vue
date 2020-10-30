@@ -12,41 +12,15 @@
 <script>
 import HomeTop from "@/components/HomeTop";
 import Result from "@/components/Result";
-const hc = require('@/utils/httpconnect');
 export default {
   name: 'Voting',
   components: { HomeTop,Result},
 
   data() {
-    return{
-      status: ''
-
-    }
+    return{}
   },
-  created: function(){
-    this.loadResult()
-  },
-  methods: {
-
-    loadResult:function(){
-  this.status = 'loading';
-  hc.get('/api/results')
-      .then(function(response){
-        console.log(response)
-      })
+  methods: {}
 }
-
-}
-
-
-  }
-
-
-
-
-
-
-
 </script>
 
 <style scoped>
