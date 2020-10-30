@@ -37,7 +37,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="add" :visible.sync="addDialogFormVisible">
+      <el-dialog title="add" :visible.sync="addDialogFormVisible" :modal-append-to-body='false'>
         <el-form :model="form">
           <el-form-item label="Party Name">
             <el-input v-model="AddObj.partyName" auto-complete="off"></el-input>
@@ -55,7 +55,7 @@
         </div>
       </el-dialog>
 
-      <el-dialog title="edit" :visible.sync="editDialogFormVisible">
+      <el-dialog title="edit" :visible.sync="editDialogFormVisible" :modal-append-to-body='false'>
         <el-form :model="editObj">
 
           <el-form-item label="New Party Name">

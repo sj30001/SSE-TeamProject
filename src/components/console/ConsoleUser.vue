@@ -49,7 +49,7 @@
           </template>
         </el-table-column>
       </el-table>
-<!--      <el-dialog title="add" :visible.sync="addDialogFormVisible">-->
+<!--      <el-dialog title="add" :visible.sync="addDialogFormVisible" :modal-append-to-body='false'>-->
 <!--        <el-form :model="form">-->
 <!--          <el-form-item label="Password">-->
 <!--            <el-input v-model="AddObj.password" auto-complete="off"></el-input>-->
@@ -74,7 +74,7 @@
 <!--          <el-button type="primary" @click="addDO">Continue</el-button>-->
 <!--        </div>-->
 <!--      </el-dialog>-->
-      <el-dialog title="edit" :visible.sync="editDialogFormVisible">
+      <el-dialog title="edit" :visible.sync="editDialogFormVisible" :modal-append-to-body='false'>
         <el-form :model="form">
           <el-form-item label="password update">
             <el-input v-model="editObj.password" auto-complete="off"></el-input>

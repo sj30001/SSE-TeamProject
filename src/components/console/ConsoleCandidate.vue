@@ -45,7 +45,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-dialog title="add" :visible.sync="addDialogFormVisible">
+      <el-dialog title="add" :visible.sync="addDialogFormVisible" :modal-append-to-body='false'>
         <el-form :model="form">
           <el-form-item label="State">
             <el-input v-model="AddObj.state" auto-complete="off"></el-input>
@@ -67,7 +67,7 @@
           <el-button type="primary" @click="addDO">Continue</el-button>
         </div>
       </el-dialog>
-      <el-dialog title="edit" :visible.sync="editDialogFormVisible">
+      <el-dialog title="edit" :visible.sync="editDialogFormVisible" :modal-append-to-body='false'>
         <el-form :model="editObj">
           <el-form-item label="Name">
             <el-input v-model="editObj.candidateName" auto-complete="off" :disabled=true></el-input>
