@@ -92,6 +92,7 @@ name: "Result",
 },
   async mounted(){
   let response = await hc.get("/api/results")
+    //sort the result base on the order of elected
     response.data.results.sort(compare('order_elected'))
 
     for(let i = 0; i < response.data.results.length; i++){
@@ -103,6 +104,7 @@ name: "Result",
       }
       this.tableData.push(temp)
     }
+    //functions handle sorting by specific property
     function compare(property){
       return function (obj1,obj2){
         return obj1[property]-obj2[property];
@@ -113,15 +115,15 @@ name: "Result",
   methods: {
      handleEdit(index, row) {
        this.tableDataIndex=row;
-       //this.editObj=index;
+       this.editObj=index;
        this.editDialogFormVisible=true;
 
      },
-     //handleAdd() {
+     handleAdd() {
        //this.editObj=index;
-       //this.addDialogFormVisible=true;
+       this.addDialogFormVisible=true;
 
-     //},
+     },
 
     editDo(){
       let index=this.tableDataIndex;

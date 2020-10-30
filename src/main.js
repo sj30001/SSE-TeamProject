@@ -8,11 +8,13 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueCookies from 'vue-cookies'
 import {VueReCaptcha} from "vue-recaptcha-v3";
+import SIdentify from './components/identify'
 
 Vue.use(VueReCaptcha, { siteKey: '6LeYV9wZAAAAAHM53hnx2i5oBtAPldmUbwmcyb6m'});
 Vue.use(VueAxios,axios)
 Vue.use(ElementUI);
 Vue.use(VueCookies);
+Vue.use(SIdentify);
 Vue.prototype.$axios = axios
 
 // set default config

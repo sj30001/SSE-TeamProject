@@ -7,67 +7,19 @@
     <h3 style="text-align: center;">Senate Voting System</h3>
     <el-form  label-width="100px" class="login-container">
       <h3 style="text-align: center;">User Login</h3>
-  <el-form class="login-form" status-icon :rules="loginRules" ref="ruleForm" :model="ruleForm" label-width="0" login>
+  <el-form class="login-form" status-icon :rules="rules" ref="ruleForm" :model="ruleForm" label-width="0" login>
 
-    <el-form-item prop="email" label="Email">
-      <el-input
-          size="small"
-          @keyup.enter.native="handleLogin"
-          v-model="ruleForm.email"
-          auto-complete="off"
-          placeholder="Please enter Email">
-      </el-input>
+    <el-form-item label="Email" prop="email">
+      <el-input v-model="ruleForm.email"></el-input>
     </el-form-item>
-
-    <el-form-item prop="password" label="Password">
-      <el-input
-          size="small"
-          @keyup.enter.native="handleLogin"
-          :type="passwordType"
-          v-model="ruleForm.password"
-          auto-complete="off"
-          placeholder="Please enter Password">
-        <i
-            class="el-icon-view el-input__icon"
-            :style="fontstyle"
-            slot="suffix"
-            @click="showPassword">
-
-        </i>
-        <i
-            slot="prefix"
-            class="icon-mima">
-        </i>
-      </el-input>
-    </el-form-item>
-
-    <el-form-item  prop="verifycode" label="CAPTCHA">
-      <el-input
-          v-model="ruleForm.verifycode"
-          placeholder="Please enter CAPTCHA code"
-          class="identifyinput">
-      </el-input>
+    <el-form-item label="Password" prop="password">
+      <el-input v-model="ruleForm.password" show-password></el-input>
+      <!--      <el-input placeholder="Password" v-model="input" show-password></el-input>-->
     </el-form-item>
 
     <el-form-item>
-      <div class="identifybox">
-        <div @click="refreshCode">
-          <s-identify :identifyCode="identifyCode"></s-identify>
-        </div>
-        <el-button
-            @click="refreshCode"
-            type='text'
-            class="textbtn">Can't see? Refresh</el-button>
-      </div>
-    </el-form-item>
-
-    <el-checkbox v-model="checked">Remember Password</el-checkbox>
-    <el-form-item>
-      <el-button
-          style="text-align: center;"
-          type="primary" size="small"
-          @submit.prevent="handleLogin"
-          class="handleLogin">Login</el-button>
+      <el-button type="primary" size="mini" @click="submitForm('ruleForm')">Continue</el-button>
+      <router-link to="/signup"><el-button size="mini" @click="resetForm('ruleForm')">SignUp</el-button></router-link>
     </el-form-item>
 
   </el-form>
@@ -77,114 +29,108 @@
 
 
 <script>
-import SIdentify from '@/components/identify.vue'
-const hc = require('@/utils/httpconnect')
-export default {
-  name: 'login',
-  data() {
-    const validateUsername = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("Email can't be empty"))
-      } else {
-        console.log('email', value)
-        callback()
-      }
-    }
-    const validateVerifycode = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please enter CAPTCHA'))
-      } else if (value !== this.identifyCode) {
-        console.log('validateVerifycode:', value)
-        callback(new Error('Incorrect CAPTCHA, please try again!'))
-      } else {
-        callback()
-      }
-    }
 
+const hc = require('@/utils/httpconnect');
+export default {
+  name: "Login",
+  data() {
+
+    const checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      if (!value) {
+        return callback(new Error('the email can not be empty'))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error('Please enter the correct email format'))
+        }
+      }, 100)
+    }
     return {
-      fontstyle: {
-      },
       ruleForm: {
         email: '',
         password: '',
-        verifyCode: ''
-      },
-      checked: false,
-      identifyCodes: '1234567890',
-      identifyCode: '',
 
-      loginRules: {
+      },
+      rules: {
         email: [
-          { required: true, trigger: 'blur', validator: validateUsername }
+          { required: true, message: 'Please enter the email address',trigger: 'blur' },
+          // {inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,message: 'Please enter the correct email format',trigger:'blur'}
+          { validator: checkEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, message: 'Please enter password', trigger: 'blur' },
-          { min: 6, message: 'Please enter at least 6 digits', trigger: 'blur' }
-        ],
-        verifycode: [
-          { required: true, trigger: 'blur', validator: validateVerifycode }
+          { required: true, message: 'Please enter the password', trigger: 'blur' }
         ]
-      },
-      passwordType: 'password'
+
+
+      }
+    };
+  },
+  components:{
+  },async mounted(){
+    this.identifyCode = ""
+    this.makeCode(this.identifyCode,4)
+    let role = this.$cookies.get('role');
+    if(role==='user'){
+      await this.$router.push({path: '/user'});
+    }else if (role==='admin'){
+      await this.$router.push({path:'/console'});
     }
   },
-  components: {
-    SIdentify
-  },
-  created() {
-  },
-  mounted() {
-    this.identifyCode = ''
-    this.makeCode(this.identifyCodes, 4)
-  },
-  computed: {
-  },
-  props: [],
   methods: {
-    showPassword() {
-      this.fontstyle === '' ? (this.fontstyle = 'color: red') : (this.fontstyle = '')
-      this.passwordType === ''
-          ? (this.passwordType = 'password')
-          : (this.passwordType = '')
-    },
-    /*
-    get user data from backend with axios
-    only test for now
-     */
-    async handleLogin() {
-      console.log(this.ruleForm);
-        let res = await hc.post('/api/login', this.ruleForm);
-        console.log(res);
-        if(res.data.status === 'success'){
-          // login success
-
-          // redirect to console page
-          await this.$router.push({path: '/console'});
-        }else {
-          // login failed
-          this.$message({
-            type: 'error',
-            message: res.data.msg
-          });
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.login();
+        } else {
+          console.log('error submit!!');
+          return false;
         }
+      });
     },
-    randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min)
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    async login(){
+      let res = await hc.post('/api/login', this.ruleForm);
+      console.log(res);
+      if(res.data.status === 'success'){
+        // login success
+        //user
+        let role = this.$cookies.get('role');
+        console.log(role);
+        if(role==='user')
+          await this.$router.push({path: '/user'});
+        else {
+          //admin
+          await this.$router.push({path: '/console'});
+        }
+      }else {
+        // login failed
+        this.$message({
+          type: 'error',
+          message: res.data.msg
+        });
+      }
     },
     refreshCode() {
       this.identifyCode = ''
-      this.makeCode(this.identifyCodes, 4)
+      this.makeCode(this.identifyCode, 4)
     },
-    makeCode(o, l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodes[
-            this.randomNum(0, this.identifyCodes.length)
-            ]
+    randomNum(min, max) {
+      max = max + 1
+      return Math.floor(Math.random() * (max - min) + min)
+    },
+    makeCode(data, len) {
+      for (let i = 0; i < len; i++) {
+        this.identifyCode += data[this.randomNum(0, data.length - 1)]
       }
-      console.log(this.identifyCode)
     }
   }
 }
+
 </script>
 
 <style scoped>
