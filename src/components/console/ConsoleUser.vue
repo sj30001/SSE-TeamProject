@@ -140,9 +140,7 @@ name: "ConsoleUser",
         id:response.data.user.id
     }
     this.tableData.push(temp)
-    console.log(temp)
 
-    console.log(response.data)
   },
 
 
@@ -164,8 +162,7 @@ name: "ConsoleUser",
     async editDo(){
       let CsrfResponse = await hc.get("/api/csrf");
       this.editObj._csrf = CsrfResponse.data.csrfToken;
-      //this.editObj.id = this.tableData.id;
-      console.log(this.editObj);
+
       let res = await hc.put('/api/users', this.editObj);
       if(res.data.status === 'success'){
         // add success
