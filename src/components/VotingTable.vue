@@ -18,7 +18,7 @@
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>A</h2>
 
-      <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value1" placeholder=" " style="width:60px">
@@ -30,13 +30,13 @@
             </el-option>
           </el-select>
 
-<h2 style="font-size:18px;">MIST PARTY</h2>
+<h2 style="font-size:18px;"><span>{{ party[0].party }}</span></h2>
         </div>
     </div></div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>B</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value2" placeholder=" " style="width:60px">
@@ -48,14 +48,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">RAIN PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[2].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>C</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value3" placeholder=" " style="width:60px">
@@ -67,14 +67,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">FOG/SUN PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[4].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>D</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value4" placeholder=" " style="width:60px">
@@ -86,14 +86,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">HUMID PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[6].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>E</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value5" placeholder=" " style="width:60px">
@@ -105,14 +105,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">BREEZE PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[8].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>F</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value6" placeholder=" " style="width:60px">
@@ -124,14 +124,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">CLOUD PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[10].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>G</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value7" placeholder=" " style="width:60px">
@@ -143,14 +143,14 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">HAHA PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[12].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
     <el-col :span="2"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%"><h2>H</h2>
 
-        <div style="font-size:50px"><i class="el-icon-picture-outline" style="text-align: center" ></i></div>
+
         <div>
           <br>
           <el-select v-model="value8" placeholder=" " style="width:60px">
@@ -162,7 +162,7 @@
             </el-option>
           </el-select>
 
-          <h2 style="font-size:18px;">ADE PARTY</h2>
+          <h2 style="font-size:18px;"><span>{{ party[14].party }}</span></h2>
         </div>
       </div>
     </div></el-col>
@@ -185,8 +185,9 @@
         </div>
         </el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>MIST PARTY</h3>
-            <div><p>Surname<br>Given name<br>Mist Party</p>
+          <div style="padding:1%"><h3><span>{{ partyList[0].partyName }}</span></h3>
+            <div><p><span>{{ party[0].candidateName }}</span></p>
+
             </div>
             <div>
               <el-select v-model="value1_1" placeholder=" " style="width:63px">
@@ -197,7 +198,7 @@
                     :value="item.value1_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Mist Party</p>
+              <div><p>{{ party[1].candidateName }}</p>
                 <div>
                   <el-select v-model="value1_2" placeholder=" " style="width:63px">
                     <el-option
@@ -214,8 +215,8 @@
         </div>
         </el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>RAIN PARTY</h3>
-            <div><p>Surname<br>Given name<br>Rain Party</p>
+          <div style="padding:1%"><h3><span>{{ party[2].party }}</span></h3>
+            <div><p><span>{{ party[2].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value2_1" placeholder=" " style="width:63px">
@@ -226,7 +227,7 @@
                     :value="item.value2_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Rain Party</p>
+              <div><p><span>{{ party[3].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value2_2" placeholder=" " style="width:63px">
                     <el-option
@@ -242,8 +243,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>FOG/SUN PARTY</h3>
-            <div><p>Surname<br>Given name<br>Fog/Sun Party</p>
+          <div style="padding:1%"><h3><span>{{ party[4].party }}</span></h3>
+            <div><p><span>{{ party[4].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value3_1" placeholder=" " style="width:63px">
@@ -254,7 +255,7 @@
                     :value="item.value3_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Fog/Sun Party</p>
+              <div><p><span>{{ party[5].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value3_2" placeholder=" " style="width:63px">
                     <el-option
@@ -270,8 +271,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>HUMID PARTY</h3>
-            <div><p>Surname<br>Given name<br>Humid Party</p>
+          <div style="padding:1%"><h3><span>{{ party[6].party }}</span></h3>
+            <div><p><span>{{ party[6].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value4_1" placeholder=" " style="width:63px">
@@ -282,7 +283,7 @@
                     :value="item.value4_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Humid Party</p>
+              <div><p><span>{{ party[7].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value4_2" placeholder=" " style="width:63px">
                     <el-option
@@ -298,8 +299,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>BREEZE PARTY</h3>
-            <div><p>Surname<br>Given name<br>Breeze Party</p>
+          <div style="padding:1%"><h3><span>{{ party[8].party }}</span></h3>
+            <div><p><span>{{ party[8].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value5_1" placeholder=" " style="width:63px">
@@ -310,7 +311,7 @@
                     :value="item.value5_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Breeze Party</p>
+              <div><p><span>{{ party[9].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value5_2" placeholder=" " style="width:63px">
                     <el-option
@@ -326,8 +327,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>CLOUD PARTY</h3>
-            <div><p>Surname<br>Given name<br>Cloud Party</p>
+          <div style="padding:1%"><h3><span>{{ party[10].party }}</span></h3>
+            <div><p><span>{{ party[10].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value6_1" placeholder=" " style="width:63px">
@@ -338,7 +339,7 @@
                     :value="item.value6_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Fog/Sun Party</p>
+              <div><p><span>{{ party[11].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value6_2" placeholder=" " style="width:63px">
                     <el-option
@@ -354,8 +355,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>HAHA PARTY</h3>
-            <div><p>Surname<br>Given name<br>Haha Party</p>
+          <div style="padding:1%"><h3><span>{{ party[12].party }}</span></h3>
+            <div><p><span>{{ party[12].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value7_1" placeholder=" " style="width:63px">
@@ -366,7 +367,7 @@
                     :value="item.value7_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Haha Party</p>
+              <div><p><span>{{ party[13].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value7_2" placeholder=" " style="width:63px">
                     <el-option
@@ -382,8 +383,8 @@
           </div>
         </div></el-col>
         <el-col :span="2"><div class="grid-content bg-purple" style="height:330px">
-          <div style="padding:1%"><h3>ADE PARTY</h3>
-            <div><p>Surname<br>Given name<br>Ade Party</p>
+          <div style="padding:1%"><h3><span>{{ party[14].party }}</span></h3>
+            <div><p>y<span>{{ party[14].candidateName }}</span></p>
             </div>
             <div>
               <el-select v-model="value8_1" placeholder=" " style="width:63px">
@@ -394,7 +395,7 @@
                     :value="item.value8_1">
                 </el-option>
               </el-select>
-              <div><p>Surname<br>Given name<br>Fog/Sun Party</p>
+              <div><p><span>{{ party[15].candidateName }}</span></p>
                 <div>
                   <el-select v-model="value8_2" placeholder=" " style="width:60px">
                     <el-option
@@ -415,7 +416,9 @@
 </template>
 
 <script>
+const hc = require('@/utils/httpconnect')
 export default {
+
 name: "voting table",
   data() {
     return {
@@ -853,9 +856,45 @@ name: "voting table",
       value7_1:'',
       value7_2:'',
       value8_1:'',
-      value8_2:''
+      value8_2:'',
+
+      partyList: [],
+      candidatesList: [],
+      party: [],
+
+
     }
-  }
+  },
+  async mounted() {
+    //get partyList
+    let partyResponse = await hc.get('/api/party')
+    for (let i=0; i < partyResponse.data.party.length;i++) {
+      let temp_1 = {
+        partyName:partyResponse.data.party[i].partyName
+      }
+      this.partyList.push(temp_1)
+    }
+    // get candidatesList
+    let candidatesResponse = await hc.get("/api/candidates")
+    for (let i=0; i < candidatesResponse.data.candidates.length;i++) {
+      let temp_2 = {
+        party: candidatesResponse.data.candidates[i].party,
+        candidateName:candidatesResponse.data.candidates[i].name,
+        //state: candidatesResponse.data.candidates[i].state
+      }
+      this.candidatesList.push(temp_2)
+    }
+    //grouping candidates
+
+    for(let i = 0 ; i < 8; i++){
+      for(let k = 0; k < this.candidatesList.length; k++){
+        if(this.candidatesList[k].party == this.partyList[i].partyName){
+          this.party.push(this.candidatesList[k])
+        }
+      }
+    }
+
+  },
 
 }
 </script>
