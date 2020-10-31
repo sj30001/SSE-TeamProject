@@ -84,7 +84,7 @@ name: "Login",
         let role = this.$cookies.get('role');
         console.log(role);
         if(role==='user')
-          await this.$router.push({path: '/user'});
+          await this.$router.push({path: '/vote'});
         else {
           //admin
           await this.$router.push({path: '/console'});

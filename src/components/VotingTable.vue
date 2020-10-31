@@ -1,6 +1,6 @@
 <template>
   <div class="table" >
-<div class="TopTable" style="width:100% !important">
+<div class="TopTable" style="width: auto !important">
   <el-row :gutter="20">
     <el-col :span="3"><div class="grid-content bg-purple" style="height:250px">
       <div style="padding:1%;"><h2 style="font-size:18px;padding:1%"> You may<br> vote in one of<br> two ways</h2>
@@ -167,8 +167,8 @@
       </div>
     </div></el-col>
   </el-row>
+  <div class="line" style="position:relative;top:-10px;width:79%;background-color: #5B7B9E;height:10px"></div>
 </div>
-    <div class="line" style="position:absolute;top:29%;width:75%;background-color: #5B7B9E;left:2%;height:1%"></div>
 <!--    BottomTable-->
     <div class="BottomTable">
       <el-row :gutter="20">

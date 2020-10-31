@@ -16,7 +16,7 @@
       <el-main>
 <!--<el-row ><el-button class="start" type="danger" plain>Start</el-button></el-row>-->
         <div class="Start">
-          <button style="background-color:#FB4E46;color:white;width:15%;height:10%;position:absolute;top:40%;left:25%;font-size:50px;border:none;border-radius: 10px; ">Start</button>
+          <button style="background-color:#FB4E46;color:white;width:15%;height:10%;position:absolute;top:40%;left:25%;font-size:50px;border:none;border-radius: 10px; " @click="startCount">Start</button>
         </div>
         <div>
           <img src="@/assets/voting.png" alt="voting image" style="position:absolute;top:30%;right:12%;width:36.6%;height:auto">
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+const hc = require('@/utils/httpconnect');
 import ConsoleTop from "@/components/console/ConsoleTop";
 import ConsoleSidebar from "@/components/console/ConsoleSidebar";
 
@@ -41,7 +42,15 @@ export default {
     if(role !== 'admin')
       await this.$router.push({path: '/login'});
   },
-  methods: {}
+  methods: {
+    async startCount(){
+      let response = await hc.get('api/count');
+      if(response.data.status === 'success'){
+        this.$message.success('Count done');
+        await this.$router.push({path: '/result'});
+      }
+    }
+  }
 
 }
 

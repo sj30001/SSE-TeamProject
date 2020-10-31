@@ -63,15 +63,21 @@ background-color="#5B7B9E"
           </el-menu-item-group>
 
         </el-submenu>
+
         <router-link v-show="isUser" to="/user" class="a"><el-menu-item index="3">
           <i class="el-icon-document"></i>
          <span slot="title">User Update</span>
         </el-menu-item></router-link>
 
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
+        <router-link v-show="isUser" to="/vote" class="a"><el-menu-item index="4">
+          <i class="el-icon-document"></i>
+          <span slot="title">Vote</span>
+        </el-menu-item></router-link>
+
+        <router-link to="/result" class="a"><el-menu-item index="5">
+          <i class="el-icon-document"></i>
           <span slot="title">Result</span>
-        </el-menu-item>
+        </el-menu-item></router-link>
       </el-menu>
     </el-col>
   </el-row>

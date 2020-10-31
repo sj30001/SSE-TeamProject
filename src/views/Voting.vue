@@ -1,8 +1,13 @@
 <template>
   <el-container>
     <el-header>
-      <HomeTop/>
+      <ConsoleTop/>
     </el-header>
+
+    <!--      sidebar-->
+    <el-aside width="300px">
+      <ConsoleSidebar/>
+    </el-aside>
     <el-main>
       <VotingTable/>
 
@@ -11,11 +16,12 @@
 </template>
 
 <script>
-import HomeTop from "@/components/HomeTop";
+import ConsoleTop from "@/components/console/ConsoleTop";
 import VotingTable from "@/components/VotingTable";
+import ConsoleSidebar from "@/components/console/ConsoleSidebar";
 export default {
 name: 'Voting',
-    components: { HomeTop,VotingTable},
+    components: { ConsoleTop,VotingTable,ConsoleSidebar},
 
 data() {
   return {}
@@ -37,8 +43,8 @@ methods: {}
 }
 .el-main{
   position:absolute;
-  top:20%;
-  left:15%;
+  top:25%;
+  left:27%;
   width:82%;
   height:100%;
 
