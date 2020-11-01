@@ -4,6 +4,7 @@ module.exports = {
         extract:true
     },
     devServer: {
+        port: 80,
         proxy: {
             '/api': {
                 target: 'http://104.199.137.67:3000/',
