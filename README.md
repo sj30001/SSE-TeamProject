@@ -1,7 +1,16 @@
 <<<<<<< HEAD
 # votesystem
+# Technology stack
+* ### Package manager: npm
+* ### Language: javascript
+* ### Framework: Vue.js
+* ### UI framework: Element-UI
 
-## Project setup
+
+# How to run
+## 1. install npm, which is to install Node.js
+[Installing Node.js via package manager (Node.js official guide)](https://nodejs.org/en/download/package-manager/)
+## 2. install libraries 
 ```
 npm install
 ```
@@ -16,15 +25,6 @@ npm run serve
 npm run build
 ```
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
